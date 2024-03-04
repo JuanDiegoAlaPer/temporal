@@ -161,7 +161,7 @@ export const Index = () => {
       eventDescription: "Descripción detallada del evento 14",
       created_at: "11-10-2023",
       date: { month: "FEB", day: "22" },
-      category: "Categoría 3",
+      category: "Deportes",
       active: true,
     },
     {
