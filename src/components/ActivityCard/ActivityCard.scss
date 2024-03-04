@@ -1,0 +1,66 @@
+.ActivityCard{
+    margin: 50px;
+    height: 295px;
+    width: 350px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    .ActivityCard-content{
+        display: flex;
+        margin: 10px;
+        border-radius: 15px;
+        height: 200px;
+        width: 310px;
+        background-color: #888;
+        align-items: end;
+        justify-content: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        .Activity-info{
+            height: 50px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: end;
+            background-color: #fff;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            align-items: center;
+
+            .date{
+                padding: 25px;
+            }
+
+            .name{
+                display: flex;
+                width: 200px;
+                justify-content: center;
+            }
+        }
+    }
+    .inscription-button{
+        display: flex;
+        margin-top: 15px;
+        height: 50px;
+        width: 150px;
+        border-radius: 5px;
+        align-items: center;
+        justify-content: center;
+        background-color: #F4D73B;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.Activity-info .date h3 {
+    margin: 0; 
+    padding: 0; 
+}
+
+.Activity-info .name h4 {
+    margin: 0; 
+    padding: 0; 
+    font-weight: 400;
+}
+
+.inscription-button h2 {
+    font-weight: 500;
+}
