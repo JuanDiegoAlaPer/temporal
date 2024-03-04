@@ -1,0 +1,93 @@
+.content-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+  }
+  
+  .card-login {
+    padding: 20px;
+    margin-top: 15px;
+    height: auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    text-align: center;
+  }
+  
+  .form-group-login {
+    padding-right: 10px;
+    padding-bottom: 10px;
+  
+    .password-input {
+      width: 100%;
+      position: relative;
+  
+      @media screen and (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        width: 245px;
+        margin-top: 10px;
+      }
+  
+      input {
+        width: 100%; 
+        padding: 8px;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin-top: 10px;
+      }
+  
+      svg {
+        position: absolute;
+        top: 15px; 
+        right: 5px;
+        cursor: pointer;
+      }
+    }
+  }
+  
+  .form-group-login label {
+    margin-bottom: 10px;
+  }
+  
+  .form-group-login input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    margin-top: 10px;
+  
+    @media screen and (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      width: 245px;
+      margin-top: 10px;
+    }
+  }
+  
+  .form-actions-login {
+    margin-top: 10px;
+  }
+  
+  .form-actions-login button {
+    background-color: #0069A3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .form-actions-login button:last-child {
+    margin-right: 0;
+  }
+  
+  .response-message-login,
+  .error-message-login {
+    margin-top: 15px;
+    color: red;
+  }
+  
