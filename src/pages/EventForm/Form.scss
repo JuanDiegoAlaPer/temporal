@@ -1,87 +1,92 @@
-.event-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  max-width: 800px;
-  margin: 0 auto;
-  margin-top: 100px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #f9f9f9;
-}
+.index-event-form {
+  .event-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 100px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+  }
 
-.card {
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: white;
-}
+  .card {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+  }
 
-.card.left {
-  grid-column: 1 / 2;
-}
+  .card.left {
+    grid-column: 1 / 2;
+  }
 
-.card.right {
-  grid-column: 2 / 3;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Centra verticalmente los elementos */
-}
+  .card.right {
+    grid-column: 2 / 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Centra verticalmente los elementos */
+  }
 
-.form-fields {
-  display: flex;
-  flex-direction: column;
-}
+  .form-fields {
+    display: flex;
+    flex-direction: column;
+  }
 
-label {
-  margin-bottom: 8px;
-  font-weight: bold;
-}
+  label {
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
 
-input[type='text'],
-input[type='date'],
-input[type='number'],
-textarea {
-  padding: 8px;
-  margin-bottom: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-  box-sizing: border-box;
-  font-family: inherit;
-  font-size: 14px;
-}
+  input[type="text"],
+  input[type="date"],
+  input[type="number"],
+  textarea {
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 14px;
+  }
 
-textarea {
-  height: 100px;
-}
+  textarea {
+    height: 100px;
+  }
 
-input[type='file'] {
-  border: none;
-  background-color: transparent;
-  color: #0069A3;
-  cursor: pointer;
-  width: 100%;
-}
+  input[type="file"] {
+    border: none;
+    background-color: transparent;
+    color: #0069a3;
+    cursor: pointer;
+    width: 100%;
+  }
 
-button {
-  padding: 10px;
-  background-color: #0090D0;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  width: 100%;
-  box-sizing: border-box;
-  width: fit-content;
-  font-family: inherit;
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
+  .create-event {
+    padding: 10px;
+    background-color: #0090d0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+    width: fit-content;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
 
-button:hover {
-  background-color: #0090D0;
+  button:hover {
+    
+      background-color: #0090d0;
+    
+    
+  }
 }

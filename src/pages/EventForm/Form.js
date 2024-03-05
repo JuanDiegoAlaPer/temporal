@@ -46,7 +46,7 @@ function EventForm() {
   };
 
   return (
-    <div className='index'>
+    <div className='index-event-form'>
       <MenuSider menuCollapsed={menuCollapsed} />
       <MenuTop
         menuCollapsed={menuCollapsed}
@@ -134,7 +134,7 @@ function EventForm() {
           </div>
         </form>
         <br />
-        <button type='submit'>Crear Evento</button>
+        <button className="create-event" type='submit'>Crear Evento</button>
       </div>
     </div>
   );
