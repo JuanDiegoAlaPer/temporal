@@ -29,7 +29,7 @@ const Login = () => {
       );
 
       if (response.data) {
-        login(response.data.access, response.data.refresh, response.data.userId);
+        login(response.data.access, response.data.refresh, response.data.userId, response.data.role);
 
         const userRole = response.data.role;
 
@@ -39,19 +39,19 @@ const Login = () => {
           navigate('/user');
         }
 
-        const msg = response.data.msg || "Login successful";
+        const msg = response.data.msg || "Iniciado correctamente!!";
 
         setResponseMessage(msg);
         setError(""); 
       } else {
-        console.error('Error: Access token not present in the server response');
+        console.error('Error: Access token no se encuantra en la respuesta del servidor');
         setResponseMessage("");
-        setError("Error logging in");
+        setError("Error al ingresar");
       }
     } catch (error) {
-      console.error('Error logging in:', error);
+      console.error('Error al ingresar:', error);
       setResponseMessage("");
-      setError(error.response ? error.response.data.msg : "Error logging in");
+      setError(error.response ? error.response.data.msg : "Error al ingresar");
     }
   };
 
