@@ -56,6 +56,7 @@ const Login = () => {
   };
 
   return (
+    <div className="container-login">
     <div className="content-login">
       <div className="card-login">
         <h2>Iniciar Sesión</h2>
@@ -98,6 +99,7 @@ const Login = () => {
         {responseMessage && <p className="response-message-login">{responseMessage}</p>}
         {error && <p className="error-message-login">{error}</p>}
       </div>
+    </div>
     </div>
   );
 };
