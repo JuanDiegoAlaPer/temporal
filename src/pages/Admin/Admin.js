@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import MenuSider from "../../components/MenuSider/MenuSider";
+import MenuSiderAdmin from "../../components/Admin/MenuSiderAdmin/MenuSiderAdmin";
 import { Input, Select } from "antd";
 import { SearchOutlined, UnorderedListOutlined } from "@ant-design/icons";
-import "./index.scss";
-import { ActivityCard } from "../../components/ActivityCard/ActivityCard";
-import MenuTop from "../../components/MenuTop/MenuTop";
+import "./Admin.scss";
+import { ActivityCardAdmin } from "../../components/Admin/ActivityCardAdmin/ActivityCardAdmin";
+import MenuTopAdmin from "../../components/Admin/MenuTopAdmin/MenuTopAdmin";
 
 const { Option } = Select;
 
-export const Index = () => {
+export const Admin = () => {
   const [menuCollapsed, setMenuCollapsed] = useState(true);
   const [searchValue, setSearchValue] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
@@ -200,16 +200,16 @@ export const Index = () => {
   }, {});
 
   return (
-    <div className='index'>
-      <MenuSider menuCollapsed={menuCollapsed} />
-      <MenuTop
+    <div className='admin'>
+      <MenuSiderAdmin menuCollapsed={menuCollapsed} />
+      <MenuTopAdmin
         menuCollapsed={menuCollapsed}
         setMenuCollapsed={setMenuCollapsed}
       />
-      <div className='container'>
-        <div className='search-card'>
+      <div className='container-admin'>
+        <div className='search-card-admin'>
           <Input
-            className='search-input'
+            className='search-input-admin'
             placeholder='Buscar'
             value={searchValue}
             onChange={handleSearchChange}
@@ -217,7 +217,7 @@ export const Index = () => {
           />
           <Select
             placeholder='Filtrar'
-            className='custom-select'
+            className='custom-select-admin'
             onChange={handleSelectChange}
             suffixIcon={
               <UnorderedListOutlined style={{ color: "rgba(0,0,0,.85)" }} />
@@ -230,24 +230,24 @@ export const Index = () => {
             ))}
           </Select>
         </div>
-        <div className='events-container'>
+        <div className='events-container-admin'>
           {selectedCategory === null ? (
             categories.map((category) => (
-              <div key={category} className='category-row'>
+              <div key={category} className='category-row-admin'>
                 <h1 style={{ marginLeft: 100 }}>{category}</h1>
-                <div className='activity-cards-row'>
+                <div className='activity-cards-row-admin'>
                   {eventsByCategory[category].map((event) => (
-                    <ActivityCard key={event.eventId} event={event} />
+                    <ActivityCardAdmin key={event.eventId} event={event} />
                   ))}
                 </div>
               </div>
             ))
           ) : (
-            <div className='category-row'>
+            <div className='category-row-admin'>
               <h1 style={{ marginLeft: 100 }}>{selectedCategory}</h1>
-              <div className='activity-cards-row'>
+              <div className='activity-cards-row-admin'>
                 {eventsByCategory[selectedCategory].map((event) => (
-                  <ActivityCard key={event.eventId} event={event} />
+                  <ActivityCardAdmin key={event.eventId} event={event} />
                 ))}
               </div>
             </div>
@@ -258,4 +258,4 @@ export const Index = () => {
   );
 };
 
-export default Index;
+export default Admin;

@@ -1,0 +1,50 @@
+.admin {
+    padding: 0;
+    margin-top: 0px;
+    .container-admin {
+      display: flex;
+      flex-direction: column;
+      margin-top: 16px;
+      .search-card-admin {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url('../../assets/images/uam2.jpeg');
+        background-size: cover; 
+        background-position: center;
+        width: 100%;
+        height: 450px;
+        margin-bottom: 50px;
+        .search-input-admin {
+          width: 500px;
+        }
+        .custom-select-admin {
+          width: 120px;
+          margin-left: 10px;
+          .ant-select-selector {
+            display: flex;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+  
+  .events-container-admin {
+    overflow-x: auto;
+  }
+  
+  .category-row-admin {
+    display: flex;
+    margin-bottom: 20px;
+    margin-left: 100px;
+    white-space: nowrap;
+    flex-direction: column;
+    align-items: start;
+  }
+  
+  .activity-cards-row-admin {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
