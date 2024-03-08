@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import "./Form.scss";
-import MenuTop from "../../components/MenuTop/MenuTop";
-import MenuSider from "../../components/MenuSider/MenuSider";
+import MenuTopAdmin from "../../components/Admin/MenuTopAdmin/MenuTopAdmin";
+import MenuSiderAdmin from "../../components/Admin/MenuSiderAdmin/MenuSiderAdmin";
 
 function EventForm() {
   const [title, setTitle] = useState("");
@@ -47,8 +47,8 @@ function EventForm() {
 
   return (
     <div className='index-event-form'>
-      <MenuSider menuCollapsed={menuCollapsed} />
-      <MenuTop
+      <MenuSiderAdmin menuCollapsed={menuCollapsed} />
+      <MenuTopAdmin
         menuCollapsed={menuCollapsed}
         setMenuCollapsed={setMenuCollapsed}
       />
