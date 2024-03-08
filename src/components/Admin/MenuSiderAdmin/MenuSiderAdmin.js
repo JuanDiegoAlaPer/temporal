@@ -17,9 +17,9 @@ export const MenuSiderAdmin = (props) => {
   const navigate = useNavigate();
   const menuItems = [
     {
-      key: "/",
+      key: "/admin",
       icon: <UserOutlined />,
-      label: <span className="navbar-text">Home</span>,
+      label: <span className="navbar-text">Inicio</span>,
     },
     {
       key: "/admin/products",

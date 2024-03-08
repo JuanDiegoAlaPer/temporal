@@ -14,7 +14,7 @@ export const MenuSider = (props) => {
     {
       key: "/",
       icon: <UserOutlined />,
-      label: <span className="navbar-text">Home</span>,
+      label: <span className="navbar-text">Inicio</span>,
     },
     {
       key: "/admin/products",
