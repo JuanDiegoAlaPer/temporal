@@ -2,7 +2,7 @@ import React from 'react';
 import './ActivityCard.scss';
 
 export const ActivityCard = ({ event }) => {
-  const { eventTitle, date } = event;
+  const { evenTitle, date } = event;
 
   return (
     <div className='ActivityCard'>
@@ -13,7 +13,7 @@ export const ActivityCard = ({ event }) => {
             <h3>{date.day}</h3>
           </div>
           <div className='name'>
-            <h4>{eventTitle}</h4>
+            <h4>{evenTitle}</h4>
           </div>
         </div>
       </div>

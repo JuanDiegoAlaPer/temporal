@@ -52,8 +52,10 @@ function EventForm() {
         menuCollapsed={menuCollapsed}
         setMenuCollapsed={setMenuCollapsed}
       />
+      <h1 style = {{display:"flex", alignItems: "center", justifyContent: "center", marginTop: "100px"}}>Crear Evento</h1>
       <div>
         <form className='event-form' onSubmit={handleSubmit}>
+          
           <div className='card left'>
             <label>
               Imagen del evento:

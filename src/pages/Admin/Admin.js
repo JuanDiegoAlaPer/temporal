@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import MenuSiderAdmin from "../../components/Admin/MenuSiderAdmin/MenuSiderAdmin";
 import { Input, Select } from "antd";
 import { SearchOutlined, UnorderedListOutlined } from "@ant-design/icons";
@@ -13,6 +14,20 @@ export const Admin = () => {
   const [searchValue, setSearchValue] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await axios.get("http://localhost:3200/api/v1/events");
+        setEvents(response.data);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+
+    fetchEvents();
+  }, []);
 
   const handleSearchChange = (e) => {
     setSearchValue(e.target.value);
@@ -23,170 +38,14 @@ export const Admin = () => {
     setSelectedCategory(value === "all" ? null : value);
   };
 
-  const [events, setEvents] = useState([
-    {
-      eventId: "1",
-      eventTitle: "Cumple de Sofi",
-      eventSubtitle: "Descripción 1",
-      eventDescription: "Descripción detallada del evento 1",
-      date_at: "11-10-2023",
-      date: { month: "MAR", day: "03" },
-      category: "Categoría Sofi",
-      place: "",
-      active: true,
-      image: "",
-      capacity: 100,
-    },
-    {
-      eventId: "2",
-      eventTitle: "Evento 2",
-      eventSubtitle: "Descripción 2",
-      eventDescription: "Descripción detallada del evento 2",
-      created_at: "11-10-2023",
-      date: { month: "FEB", day: "22" },
-      category: "Categoría 1",
-      active: true,
-    },
-    {
-      eventId: "3",
-      eventTitle: "Evento 3",
-      eventSubtitle: "Descripción 3",
-      eventDescription: "Descripción detallada del evento 3",
-      created_at: "11-10-2023",
-      date: { month: "FEB", day: "22" },
-      category: "Categoría 1",
-      active: true,
-    },
-    {
-      eventId: "4",
-      eventTitle: "Evento 4",
-      eventSubtitle: "Descripción 4",
-      eventDescription: "Descripción detallada del evento 4",
-      created_at: "11-10-2023",
-      date: { month: "FEB", day: "22" },
-      category: "Categoría 1",
-      active: true,
-    },
-    {
-      eventId: "5",
-      eventTitle: "Evento 5",
-      eventSubtitle: "Descripción 5",
-      eventDescription: "Descripción detallada del evento 5",
-      created_at: "11-10-2023",
-      date: { month: "FEB", day: "22" },
-      category: "Categoría 1",
-      active: true,
-    },
-    {
-      eventId: "6",
-      eventTitle: "Evento 6",
-      eventSubtitle: "Descripción 6",
-      eventDescription: "Descripción detallada del evento 6",
-      created_at: "11-10-2023",
-      date: { month: "FEB", day: "22" },
-      category: "Categoría 2",
-      active: false,
-    },
-    {
-      eventId: "7",
-      eventTitle: "Evento 7",
-      eventSubtitle: "Descripción 7",
-      eventDescription: "Descripción detallada del evento 7",
-      created_at: "11-10-2023",
-      date: { month: "FEB", day: "22" },
-      category: "Categoría 1",
-      active: true,
-    },
-    {
-      eventId: "8",
-      eventTitle: "Evento 8",
-      eventSubtitle: "Descripción 8",
-      eventDescription: "Descripción detallada del evento 8",
-      created_at: "11-10-2023",
-      date: { month: "FEB", day: "22" },
-      category: "Categoría 1",
-      active: true,
-    },
-    {
-      eventId: "9",
-      eventTitle: "Evento 9",
-      eventSubtitle: "Descripción 9",
-      eventDescription: "Descripción detallada del evento 9",
-      created_at: "11-10-2023",
-      date: { month: "FEB", day: "22" },
-      category: "Categoría 2",
-      active: false,
-    },
-    {
-      eventId: "10",
-      eventTitle: "Evento 10",
-      eventSubtitle: "Descripción 10",
-      eventDescription: "Descripción detallada del evento 10",
-      created_at: "11-10-2023",
-      date: { month: "FEB", day: "22" },
-      category: "Categoría 2",
-      active: true,
-    },
-    {
-      eventId: "11",
-      eventTitle: "Evento 11",
-      eventSubtitle: "Descripción 11",
-      eventDescription: "Descripción detallada del evento 11",
-      created_at: "11-10-2023",
-      date: { month: "FEB", day: "22" },
-      category: "Categoría 3",
-      active: true,
-    },
-    {
-      eventId: "12",
-      eventTitle: "Evento 12",
-      eventSubtitle: "Descripción 12",
-      eventDescription: "Descripción detallada del evento 12",
-      created_at: "11-10-2023",
-      date: { month: "FEB", day: "22" },
-      category: "Categoría 3",
-      active: true,
-    },
-    {
-      eventId: "13",
-      eventTitle: "Evento 13",
-      eventSubtitle: "Descripción 13",
-      eventDescription: "Descripción detallada del evento 13",
-      created_at: "11-10-2023",
-      date: { month: "FEB", day: "22" },
-      category: "Categoría 3",
-      active: true,
-    },
-    {
-      eventId: "14",
-      eventTitle: "Evento 14",
-      eventSubtitle: "Descripción 14",
-      eventDescription: "Descripción detallada del evento 14",
-      created_at: "11-10-2023",
-      date: { month: "FEB", day: "22" },
-      category: "Deportes",
-      active: true,
-    },
-    {
-      eventId: "15",
-      eventTitle: "Evento 15",
-      eventSubtitle: "Descripción 15",
-      eventDescription: "Descripción detallada del evento 15",
-      created_at: "11-10-2023",
-      date: { month: "FEB", day: "22" },
-      category: "Categoría 3",
-      active: true,
-    },
-  ]);
-
   const filteredEventsTitle = events.filter((event) =>
-    event.eventTitle.toLowerCase().includes(searchValue.toLowerCase())
+    event.evenTitle.toLowerCase().includes(searchValue.toLowerCase())
   );
 
   const filteredEvents = events.filter(
     (event) =>
       event.active &&
-      event.eventTitle.toLowerCase().includes(searchValue.toLowerCase())
+      event.evenTitle.toLowerCase().includes(searchValue.toLowerCase())
   );
 
   const categories = [
@@ -237,7 +96,7 @@ export const Admin = () => {
                 <h1 style={{ marginLeft: 100 }}>{category}</h1>
                 <div className='activity-cards-row-admin'>
                   {eventsByCategory[category].map((event) => (
-                    <ActivityCardAdmin key={event.eventId} event={event} />
+                    <ActivityCardAdmin key={event._id} event={event} />
                   ))}
                 </div>
               </div>
@@ -247,7 +106,7 @@ export const Admin = () => {
               <h1 style={{ marginLeft: 100 }}>{selectedCategory}</h1>
               <div className='activity-cards-row-admin'>
                 {eventsByCategory[selectedCategory].map((event) => (
-                  <ActivityCardAdmin key={event.eventId} event={event} />
+                  <ActivityCardAdmin key={event._id} event={event} />
                 ))}
               </div>
             </div>

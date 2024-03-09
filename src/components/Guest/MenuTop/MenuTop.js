@@ -6,7 +6,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { Logo } from "../../assets/index";
+import { Logo } from "../../../assets/index";
 import "./MenuTop.scss";
 
 function MenuTop(props) {
