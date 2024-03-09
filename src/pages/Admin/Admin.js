@@ -14,6 +14,7 @@ export const Admin = () => {
   const [searchValue, setSearchValue] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
+
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -28,7 +29,6 @@ export const Admin = () => {
 
     fetchEvents();
   }, []);
-
   const handleSearchChange = (e) => {
     setSearchValue(e.target.value);
   };
@@ -38,12 +38,12 @@ export const Admin = () => {
     setSelectedCategory(value === "all" ? null : value);
   };
 
+
   const filteredEventsTitle = events.filter((event) =>
     event.evenTitle.toLowerCase().includes(searchValue.toLowerCase())
   );
 
-  const filteredEvents = events.filter(
-    (event) =>
+  const filteredEvents = events.filter((event) =>
       event.active &&
       event.evenTitle.toLowerCase().includes(searchValue.toLowerCase())
   );
