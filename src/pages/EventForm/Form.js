@@ -1,41 +1,87 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import axios from "axios";
 import "./Form.scss";
 import MenuTopAdmin from "../../components/Admin/MenuTopAdmin/MenuTopAdmin";
 import MenuSiderAdmin from "../../components/Admin/MenuSiderAdmin/MenuSiderAdmin";
 
 function EventForm() {
-  const [title, setTitle] = useState("");
-  const [caption, setCaption] = useState("");
-  const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
+  const [evenTitle, setEvenTitle] = useState("");
+  const [eventSubtitle, setEventSubtitle] = useState("");
+  const [eventDescription, setEventDescription] = useState("");
+  const [date_at, setDate_at] = useState("");
   const [category, setCategory] = useState("");
-  const [location, setLocation] = useState("");
+  const [place, setPlace] = useState("");
   const [capacity, setCapacity] = useState("");
   const [image, setImage] = useState(null);
   const [menuCollapsed, setMenuCollapsed] = useState(true);
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [serverError, setServerError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleDateChange = (e) => {
+    const selectedDate = new Date(e.target.value);
+    selectedDate.setDate(selectedDate.getDate() + 1);
+    console.log(selectedDate);
+    const selectedDay = selectedDate.getDate();
+    const selectedMonth = selectedDate
+      .toLocaleString("es-ES", {
+        month: "short",
+      })
+      .toUpperCase();
+    setDay(selectedDay);
+    setMonth(selectedMonth);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí puedes enviar los datos del evento a tu backend o hacer lo que necesites con ellos
-    console.log({
-      title,
-      caption,
-      description,
-      date,
+
+    const eventData = {
+      evenTitle,
+      eventSubtitle,
+      eventDescription,
+      date_at,
       category,
-      location,
+      place,
       capacity,
       image,
-    });
-    // También puedes resetear el formulario después de enviar los datos
-    setTitle("");
-    setCaption("");
-    setDescription("");
-    setDate("");
+      date: { month, day }
+    };
+
+    const accessToken = localStorage.getItem("accessToken");
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3200/api/v1/events/event",
+        eventData,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      if (response.status === 201) {
+        console.log("Evento creado exitosamente");
+        // Lógica adicional después de crear el evento
+      } else {
+        console.error("Error al crear el evento");
+        console.log(response)
+        // Manejo de errores
+      }
+    } catch (error) {
+      console.error("Error al conectarse con el servidor", error);
+      // Manejo de errores de conexión
+      setServerError("Error connecting to the server");
+    }
+
+    // Limpiar los campos después del envío exitoso
+    setEvenTitle("");
+    setEventSubtitle("");
+    setEventDescription("");
+    setDate_at("");
     setCategory("");
-    setLocation("");
+    setPlace("");
     setCapacity("");
     setImage(null);
   };
@@ -46,69 +92,80 @@ function EventForm() {
   };
 
   return (
-    <div className='index-event-form'>
+    <div className="index-event-form">
       <MenuSiderAdmin menuCollapsed={menuCollapsed} />
       <MenuTopAdmin
         menuCollapsed={menuCollapsed}
         setMenuCollapsed={setMenuCollapsed}
       />
-      <h1 style = {{display:"flex", alignItems: "center", justifyContent: "center", marginTop: "100px"}}>Crear Evento</h1>
+      <h1
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginTop: "100px",
+        }}
+      >
+        Crear Evento
+      </h1>
       <div>
-        <form className='event-form' onSubmit={handleSubmit}>
-          
-          <div className='card left'>
+        <form className="event-form" onSubmit={handleSubmit}>
+          <div className="card left">
             <label>
               Imagen del evento:
               <input
-                type='file'
-                accept='image/*'
+                type="file"
+                accept="image/*"
                 onChange={handleImageChange}
-                required
+                //required
               />
             </label>
           </div>
-          <div className='card right'>
-            <div className='form-fields'>
+          <div className="card right">
+            <div className="form-fields">
               <label>
                 Titulo del evento:
                 <input
-                  type='text'
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
+                  type="text"
+                  value={evenTitle}
+                  onChange={(e) => setEvenTitle(e.target.value)}
                   required
                 />
               </label>
               <label>
                 Subtitulo del evento:
                 <input
-                  type='text'
-                  value={caption}
-                  onChange={(e) => setCaption(e.target.value)}
+                  type="text"
+                  value={eventSubtitle}
+                  onChange={(e) => setEventSubtitle(e.target.value)}
                   required
                 />
               </label>
               <label>
                 Descripción del evento:
                 <input
-                  type='text'
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  type="text"
+                  value={eventDescription}
+                  onChange={(e) => setEventDescription(e.target.value)}
                   required
                 />
               </label>
               <label>
                 Fecha del evento:
                 <input
-                  type='date'
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
+                  type="date"
+                  value={date_at}
+                  onChange={(e) => {
+                    setDate_at(e.target.value);
+                    handleDateChange(e);
+                  }}
                   required
                 />
               </label>
               <label>
                 Categoría del evento:
                 <input
-                  type='text'
+                  type="text"
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                   required
@@ -117,16 +174,16 @@ function EventForm() {
               <label>
                 Locación del evento:
                 <input
-                  type='text'
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
+                  type="text"
+                  value={place}
+                  onChange={(e) => setPlace(e.target.value)}
                   required
                 />
               </label>
               <label>
                 Aforo del evento:
                 <input
-                  type='number'
+                  type="number"
                   value={capacity}
                   onChange={(e) => setCapacity(e.target.value)}
                   required
@@ -134,10 +191,21 @@ function EventForm() {
               </label>
             </div>
           </div>
+          <div className="button-container">
+            <button className="create-event" type="submit">
+              Crear Evento
+            </button>
+          </div>
+          <div className="button-back-container">
+            <Link to="/admin">
+              <button className="create-event" type="submit">
+                Atrás
+              </button>
+            </Link>
+          </div>
         </form>
-        <br />
-        <button className="create-event" type='submit'>Crear Evento</button>
       </div>
+      {serverError && <p>{serverError}</p>}
     </div>
   );
 }

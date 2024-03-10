@@ -38,13 +38,15 @@ export const Admin = () => {
     setSelectedCategory(value === "all" ? null : value);
   };
 
-
-  const filteredEventsTitle = events.filter((event) =>
-    event.evenTitle.toLowerCase().includes(searchValue.toLowerCase())
+  const filteredEventsTitle = events.filter(
+    (event) =>
+      event.evenTitle &&
+      event.evenTitle.toLowerCase().includes(searchValue.toLowerCase())
   );
 
-  const filteredEvents = events.filter((event) =>
-      event.active &&
+  const filteredEvents = events.filter(
+    (event) =>
+      event.evenTitle &&
       event.evenTitle.toLowerCase().includes(searchValue.toLowerCase())
   );
 
@@ -59,29 +61,30 @@ export const Admin = () => {
   }, {});
 
   return (
-    <div className='admin'>
+    <div className="admin">
       <MenuSiderAdmin menuCollapsed={menuCollapsed} />
       <MenuTopAdmin
         menuCollapsed={menuCollapsed}
         setMenuCollapsed={setMenuCollapsed}
       />
-      <div className='container-admin'>
-        <div className='search-card-admin'>
+      <div className="container-admin">
+        <div className="search-card-admin">
           <Input
-            className='search-input-admin'
-            placeholder='Buscar'
+            className="search-input-admin"
+            placeholder="Buscar"
             value={searchValue}
             onChange={handleSearchChange}
             suffix={<SearchOutlined style={{ color: "rgba(0,0,0,.85)" }} />}
           />
           <Select
-            placeholder='Filtrar'
-            className='custom-select-admin'
+            placeholder="Filtrar"
+            className="custom-select-admin"
             onChange={handleSelectChange}
             suffixIcon={
               <UnorderedListOutlined style={{ color: "rgba(0,0,0,.85)" }} />
-            }>
-            <Option value='all'>Todo</Option>
+            }
+          >
+            <Option value="all">Todo</Option>
             {categories.map((category) => (
               <Option key={category} value={category}>
                 {category}
@@ -89,12 +92,12 @@ export const Admin = () => {
             ))}
           </Select>
         </div>
-        <div className='events-container-admin'>
+        <div className="events-container-admin">
           {selectedCategory === null ? (
             categories.map((category) => (
-              <div key={category} className='category-row-admin'>
+              <div key={category} className="category-row-admin">
                 <h1 style={{ marginLeft: 100 }}>{category}</h1>
-                <div className='activity-cards-row-admin'>
+                <div className="activity-cards-row-admin">
                   {eventsByCategory[category].map((event) => (
                     <ActivityCardAdmin key={event._id} event={event} />
                   ))}
@@ -102,9 +105,9 @@ export const Admin = () => {
               </div>
             ))
           ) : (
-            <div className='category-row-admin'>
+            <div className="category-row-admin">
               <h1 style={{ marginLeft: 100 }}>{selectedCategory}</h1>
-              <div className='activity-cards-row-admin'>
+              <div className="activity-cards-row-admin">
                 {eventsByCategory[selectedCategory].map((event) => (
                   <ActivityCardAdmin key={event._id} event={event} />
                 ))}
