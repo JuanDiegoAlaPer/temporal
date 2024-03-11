@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Switch } from "@material-ui/core";
+import { Grid } from "@mui/material";
 import "./EventEdit.scss";
 import MenuTopAdmin from "../../components/Admin/MenuTopAdmin/MenuTopAdmin";
 import MenuSiderAdmin from "../../components/Admin/MenuSiderAdmin/MenuSiderAdmin";
@@ -79,7 +80,7 @@ export const EventEdit = () => {
         setActive(response.data.active);
 
         const selectedDate = new Date(response.data.date_at);
-        selectedDate.setDate(selectedDate.getDate()+1);
+        selectedDate.setDate(selectedDate.getDate() + 1);
         console.log(selectedDate);
         const selectedDay = selectedDate.getDate();
         const selectedMonth = selectedDate
@@ -168,11 +169,11 @@ export const EventEdit = () => {
   };
 
   const handleToggleActive = () => {
-    setActive(!active); 
+    setActive(!active);
   };
 
   return (
-    <div className="index-event-form">
+    <div className="index-event-edit">
       <MenuSiderAdmin menuCollapsed={menuCollapsed} />
       <MenuTopAdmin
         menuCollapsed={menuCollapsed}
@@ -189,109 +190,119 @@ export const EventEdit = () => {
         Editar Evento
       </h1>
       <div>
-        <form className="event-form" onSubmit={handleSubmit}>
-          <div className="card left">
-            <label>
-              Imagen del evento:
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                //required
-              />
-            </label>
-          </div>
-          <div className="card right">
-            <div className="form-fields">
-              <label>
-                Titulo del evento:
-                <input
-                  type="text"
-                  value={evenTitle}
-                  onChange={(e) => setEvenTitle(e.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Subtitulo del evento:
-                <input
-                  type="text"
-                  value={eventSubtitle}
-                  onChange={(e) => setEventSubtitle(e.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Descripción del evento:
-                <input
-                  type="text"
-                  value={eventDescription}
-                  onChange={(e) => setEventDescription(e.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Fecha del evento:
-                <input
-                  type="date"
-                  value={date_at}
-                  onChange={(e) => {
-                    setDate_at(e.target.value);
-                    handleDateChange(e);
-                  }}
-                  required
-                />
-              </label>
-              <label>
-                Categoría del evento:
-                <input
-                  type="text"
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Locación del evento:
-                <input
-                  type="text"
-                  value={place}
-                  onChange={(e) => setPlace(e.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Aforo del evento:
-                <input
-                  type="number"
-                  value={capacity}
-                  onChange={(e) => setCapacity(e.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Activo:
-                <Switch
-                  checked={active}
-                  onChange={handleToggleActive}
-                  color="primary"
-                  name="active"
-                  inputProps={{ "aria-label": "toggle event active status" }}
-                />
-              </label>
-            </div>
-          </div>
-          <div className="button-container">
-            <button className="create-event" type="submit">
-              Editar Evento
-            </button>
-          </div>
-          <div className="button-back-container">
-            <Link to="/admin">
-              <button className="create-event" type="submit">
-                Atrás
+        <form className="event-edit" onSubmit={handleSubmit}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6} md={6}>
+              <div className="card-edit right">
+                <div className="form-fields">
+                  <label>
+                    Titulo del evento:
+                    <input
+                      type="text"
+                      value={evenTitle}
+                      onChange={(e) => setEvenTitle(e.target.value)}
+                      required
+                    />
+                  </label>
+                  <label>
+                    Subtitulo del evento:
+                    <input
+                      type="text"
+                      value={eventSubtitle}
+                      onChange={(e) => setEventSubtitle(e.target.value)}
+                      required
+                    />
+                  </label>
+                  <label>
+                    Descripción del evento:
+                    <input
+                      type="text"
+                      value={eventDescription}
+                      onChange={(e) => setEventDescription(e.target.value)}
+                      required
+                    />
+                  </label>
+                  <label>
+                    Fecha del evento:
+                    <input
+                      type="date"
+                      value={date_at}
+                      onChange={(e) => {
+                        setDate_at(e.target.value);
+                        handleDateChange(e);
+                      }}
+                      required
+                    />
+                  </label>
+                  <label>
+                    Categoría del evento:
+                    <input
+                      type="text"
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                      required
+                    />
+                  </label>
+                  <label>
+                    Locación del evento:
+                    <input
+                      type="text"
+                      value={place}
+                      onChange={(e) => setPlace(e.target.value)}
+                      required
+                    />
+                  </label>
+                  <label>
+                    Aforo del evento:
+                    <input
+                      type="number"
+                      value={capacity}
+                      onChange={(e) => setCapacity(e.target.value)}
+                      required
+                    />
+                  </label>
+                  <label>
+                    Activo:
+                    <Switch
+                      checked={active}
+                      onChange={handleToggleActive}
+                      color="primary"
+                      name="active"
+                      inputProps={{
+                        "aria-label": "toggle event active status",
+                      }}
+                    />
+                  </label>
+                </div>
+              </div>
+            </Grid>
+            <Grid item xs={12} sm={6} md={6}>
+              <div className="card-edit left">
+                <label>
+                  Imagen del evento:
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    //required
+                  />
+                </label>
+              </div>
+            </Grid>
+          </Grid>
+          <div className="buttons-container-edit">
+            <div className="button-container-edit">
+              <button className="edit-event" type="submit">
+                Crear Evento
               </button>
-            </Link>
+            </div>
+            <div className="button-back-container-edit">
+              <Link to="/admin">
+                <button className="edit-event" type="submit">
+                  Atrás
+                </button>
+              </Link>
+            </div>
           </div>
         </form>
       </div>

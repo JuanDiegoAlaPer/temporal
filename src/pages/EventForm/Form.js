@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { Modal } from "antd";
-import { useNavigate } from "react-router-dom"; 
+import { Grid } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import "./Form.scss";
 import MenuTopAdmin from "../../components/Admin/MenuTopAdmin/MenuTopAdmin";
 import MenuSiderAdmin from "../../components/Admin/MenuSiderAdmin/MenuSiderAdmin";
@@ -40,11 +41,11 @@ function EventForm() {
   };
 
   const handleModal = () => {
-    setModalVisible(true); 
+    setModalVisible(true);
   };
 
   const handleCancelModal = () => {
-    navigate('/admin'); 
+    navigate("/admin");
     setModalVisible(false);
   };
 
@@ -60,7 +61,7 @@ function EventForm() {
       place,
       capacity,
       image,
-      date: { month, day }
+      date: { month, day },
     };
 
     const accessToken = localStorage.getItem("accessToken");
@@ -81,7 +82,7 @@ function EventForm() {
         handleModal();
       } else {
         console.error("Error al crear el evento");
-        console.log(response)
+        console.log(response);
       }
     } catch (error) {
       console.error("Error al conectarse con el servidor", error);
@@ -103,8 +104,6 @@ function EventForm() {
     setImage(file);
   };
 
-  
-
   return (
     <div className="index-event-form">
       <MenuSiderAdmin menuCollapsed={menuCollapsed} />
@@ -124,98 +123,106 @@ function EventForm() {
       </h1>
       <div>
         <form className="event-form" onSubmit={handleSubmit}>
-          <div className="card left">
-            <label>
-              Imagen del evento:
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                //required
-              />
-            </label>
-          </div>
-          <div className="card right">
-            <div className="form-fields">
-              <label>
-                Titulo del evento:
-                <input
-                  type="text"
-                  value={evenTitle}
-                  onChange={(e) => setEvenTitle(e.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Subtitulo del evento:
-                <input
-                  type="text"
-                  value={eventSubtitle}
-                  onChange={(e) => setEventSubtitle(e.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Descripción del evento:
-                <input
-                  type="text"
-                  value={eventDescription}
-                  onChange={(e) => setEventDescription(e.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Fecha del evento:
-                <input
-                  type="date"
-                  value={date_at}
-                  onChange={(e) => {
-                    setDate_at(e.target.value);
-                    handleDateChange(e);
-                  }}
-                  required
-                />
-              </label>
-              <label>
-                Categoría del evento:
-                <input
-                  type="text"
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Locación del evento:
-                <input
-                  type="text"
-                  value={place}
-                  onChange={(e) => setPlace(e.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Aforo del evento:
-                <input
-                  type="number"
-                  value={capacity}
-                  onChange={(e) => setCapacity(e.target.value)}
-                  required
-                />
-              </label>
-            </div>
-          </div>
-          <div className="button-container">
-            <button className="create-event" type="submit">
-              Crear Evento
-            </button>
-          </div>
-          <div className="button-back-container">
-            <Link to="/admin">
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6} md={6}>
+              <div className="card right">
+                <div className="form-fields">
+                  <label>
+                    Titulo del evento:
+                    <input
+                      type="text"
+                      value={evenTitle}
+                      onChange={(e) => setEvenTitle(e.target.value)}
+                      required
+                    />
+                  </label>
+                  <label>
+                    Subtitulo del evento:
+                    <input
+                      type="text"
+                      value={eventSubtitle}
+                      onChange={(e) => setEventSubtitle(e.target.value)}
+                      required
+                    />
+                  </label>
+                  <label>
+                    Descripción del evento:
+                    <input
+                      type="text"
+                      value={eventDescription}
+                      onChange={(e) => setEventDescription(e.target.value)}
+                      required
+                    />
+                  </label>
+                  <label>
+                    Fecha del evento:
+                    <input
+                      type="date"
+                      value={date_at}
+                      onChange={(e) => {
+                        setDate_at(e.target.value);
+                        handleDateChange(e);
+                      }}
+                      required
+                    />
+                  </label>
+                  <label>
+                    Categoría del evento:
+                    <input
+                      type="text"
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                      required
+                    />
+                  </label>
+                  <label>
+                    Locación del evento:
+                    <input
+                      type="text"
+                      value={place}
+                      onChange={(e) => setPlace(e.target.value)}
+                      required
+                    />
+                  </label>
+                  <label>
+                    Aforo del evento:
+                    <input
+                      type="number"
+                      value={capacity}
+                      onChange={(e) => setCapacity(e.target.value)}
+                      required
+                    />
+                  </label>
+                </div>
+              </div>
+            </Grid>
+            <Grid item xs={12} sm={6} md={6}>
+              <div className="card left">
+                <label>
+                  Imagen del evento:
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    //required
+                  />
+                </label>
+              </div>
+            </Grid>
+          </Grid>
+          <div className="buttons-container">
+            <div className="button-container">
               <button className="create-event" type="submit">
-                Atrás
+                Crear Evento
               </button>
-            </Link>
+            </div>
+            <div className="button-back-container">
+              <Link to="/admin">
+                <button className="create-event" type="submit">
+                  Atrás
+                </button>
+              </Link>
+            </div>
           </div>
         </form>
       </div>
