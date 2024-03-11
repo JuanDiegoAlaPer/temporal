@@ -16,7 +16,7 @@ function EventForm() {
   const [image, setImage] = useState(null);
   const [menuCollapsed, setMenuCollapsed] = useState(true);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const eventData = {
