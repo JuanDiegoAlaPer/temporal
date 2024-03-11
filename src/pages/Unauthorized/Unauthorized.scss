@@ -1,0 +1,33 @@
+.content-unauthorized {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+  }
+  
+  .card-unauthorized {
+    padding: 20px;
+    margin-top: 15px;
+    height: 200px;
+    width: 300px;
+    background-color: #B2B2B2;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    padding: 10px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card-unauthorized button {
+    background-color: #0069A3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 10px;
+  }

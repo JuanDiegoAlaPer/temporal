@@ -1,70 +1,108 @@
-.ActivityCard-admin{
-    margin: 30px;
-    height: 295px;
-    width: 350px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    .ActivityCard-content-admin{
-        display: flex;
-        margin: 10px;
-        border-radius: 15px;
-        height: 200px;
-        width: 310px;
-        background-color: #888;
-        align-items: end;
-        justify-content: center;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        .Activity-info-admin{
-            height: 50px;
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            align-items: end;
-            background-color: #fff;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-            align-items: center;
+.ActivityCard-admin {
+  margin: 30px;
+  height: 295px;
+  width: 350px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 
-            .date-admin{
-                padding: 25px;
-            }
-
-            .name-admin{
-                display: flex;
-                width: 200px;
-                justify-content: center;
-            }
-        }
-    }
-    .inscription-button-admin{
-        display: flex;
-        margin-top: 15px;
+  .ActivityCard-content-admin {
+    &-active-background {
+      display: flex;
+      margin: 10px;
+      border-radius: 15px;
+      height: 200px;
+      width: 310px;
+      align-items: end;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      background-color: #888;
+      .Activity-info-admin {
         height: 50px;
-        width: 150px;
-        border-radius: 5px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: end;
+        background-color: #fff;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
         align-items: center;
-        justify-content: center;
-        background-color: #F4D73B;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+
+        .date-admin {
+          padding: 25px;
+        }
+
+        .name-admin {
+          display: flex;
+          width: 200px;
+          justify-content: center;
+        }
+      }
     }
+
+    &-inactive-background {
+      display: flex;
+      margin: 10px;
+      border-radius: 15px;
+      height: 200px;
+      width: 310px;
+      align-items: end;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      background-color: #000;
+      .Activity-info-admin {
+        height: 50px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: end;
+        background-color: #fff;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        align-items: center;
+
+        .date-admin {
+          padding: 25px;
+        }
+
+        .name-admin {
+          display: flex;
+          width: 200px;
+          justify-content: center;
+        }
+      }
+    }
+  }
+
+  .edit-button-admin {
+    display: flex;
+    margin-top: 15px;
+    height: 50px;
+    width: 150px;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4d73b;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+  }
 }
 
 .Activity-info-admin .date-admin h3 {
-    margin: 0; 
-    padding: 0; 
+  margin: 0;
+  padding: 0;
 }
 
 .Activity-info-admin .name-admin h4 {
-    margin: 0;
-    padding: 0;
-    font-weight: 400;
-    white-space: wrap;
-    max-width: 200px; 
-    overflow-wrap: break-word; 
-    text-align: center;
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  white-space: wrap;
+  max-width: 200px;
+  overflow-wrap: break-word;
+  text-align: center;
 }
 
-.inscription-button-admin h2 {
-    font-weight: 500;
+.edit-button-admin h2 {
+  font-weight: 500;
 }

@@ -18,6 +18,40 @@ export const Admin = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
+    const checkUserRole = async () => {
+      const accessToken = localStorage.getItem("accessToken");
+      const refreshToken = localStorage.getItem("refreshToken");
+  
+      if (!accessToken || !refreshToken) {
+        window.location.href = "/unauthorized";
+        return;
+      }
+  
+      try {
+        const token = { token: accessToken };
+        const response = await axios.post(
+          "http://localhost:3200/api/v1/auth/role",
+          token
+        );
+  
+        if (response.status !== 200) {
+          throw new Error("Failed to fetch user role");
+        }
+  
+        const { role } = response.data;
+  
+        if (role !== "admin") {
+          window.location.href = "/user";
+        }
+      } catch (error) {
+        console.error("Error checking user role:", error);
+      }
+    };
+  
+    checkUserRole();
+  }, []);
+
+  useEffect(() => {
     const fetchEvents = async () => {
       try {
         const response = await axios.get("http://localhost:3200/api/v1/events");

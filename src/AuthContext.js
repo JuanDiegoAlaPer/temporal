@@ -8,16 +8,12 @@ export const AuthProvider = ({ children }) => {
   const [userId, setUserId] = useState(null);
   const [role, setRole] = useState(null);
 
-  const login = (accessToken, refreshToken, userId, role) => {
+  const login = (accessToken, refreshToken) => {
     try {
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
-      localStorage.setItem('userId', userId);
-      localStorage.setItem('role', role);
       setAccessToken(accessToken);
       setRefreshToken(refreshToken);
-      setUserId(userId);
-      setRole(role);
     } catch (error) {
       console.error('Error saving to localStorage:', error);
     }
@@ -28,15 +24,11 @@ export const AuthProvider = ({ children }) => {
     try {
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
-      localStorage.removeItem('userId');
-      localStorage.removeItem('role');
     } catch (error) {
       console.error('Error removing from localStorage:', error);
     }
     setAccessToken(null);
     setRefreshToken(null);
-    setUserId(null);
-    setRole(null);
   };
 
   const isAuthenticated = () => {

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./Form.scss";
+import { Switch } from "@material-ui/core";
+import "./EventEdit.scss";
 import MenuTopAdmin from "../../components/Admin/MenuTopAdmin/MenuTopAdmin";
 import MenuSiderAdmin from "../../components/Admin/MenuSiderAdmin/MenuSiderAdmin";
 
-function EventForm() {
+export const EventEdit = () => {
+  const { id } = useParams();
+  const [event, setEvent] = useState(null);
   const [evenTitle, setEvenTitle] = useState("");
   const [eventSubtitle, setEventSubtitle] = useState("");
   const [eventDescription, setEventDescription] = useState("");
@@ -14,34 +17,37 @@ function EventForm() {
   const [place, setPlace] = useState("");
   const [capacity, setCapacity] = useState("");
   const [image, setImage] = useState(null);
-  const [menuCollapsed, setMenuCollapsed] = useState(true);
+  const [menuCollapsed, setMenuCollapsed] = useState("");
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
+  const [active, setActive] = useState(false);
   const [serverError, setServerError] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkUserRole = async () => {
       const accessToken = localStorage.getItem("accessToken");
       const refreshToken = localStorage.getItem("refreshToken");
-  
+
       if (!accessToken || !refreshToken) {
         window.location.href = "/unauthorized";
         return;
       }
-  
+
       try {
         const token = { token: accessToken };
         const response = await axios.post(
           "http://localhost:3200/api/v1/auth/role",
           token
         );
-  
+
         if (response.status !== 200) {
           throw new Error("Failed to fetch user role");
         }
-  
+
         const { role } = response.data;
-  
+
         if (role !== "admin") {
           window.location.href = "/user";
         }
@@ -49,9 +55,47 @@ function EventForm() {
         console.error("Error checking user role:", error);
       }
     };
-  
+
     checkUserRole();
   }, []);
+
+  useEffect(() => {
+    const fetchEventData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3200/api/v1/events/${id}`
+        );
+        const formattedDate = new Date(response.data.date_at)
+          .toISOString()
+          .slice(0, 10);
+        setEvent(response.data);
+        setEvenTitle(response.data.evenTitle);
+        setEventSubtitle(response.data.eventSubtitle);
+        setEventDescription(response.data.eventDescription);
+        setDate_at(formattedDate);
+        setCategory(response.data.category);
+        setPlace(response.data.place);
+        setCapacity(response.data.capacity);
+        setActive(response.data.active);
+
+        const selectedDate = new Date(response.data.date_at);
+        selectedDate.setDate(selectedDate.getDate()+1);
+        console.log(selectedDate);
+        const selectedDay = selectedDate.getDate();
+        const selectedMonth = selectedDate
+          .toLocaleString("es-ES", {
+            month: "short",
+          })
+          .toUpperCase();
+        setDay(selectedDay);
+        setMonth(selectedMonth);
+      } catch (error) {
+        console.error("Error fetching event data:", error);
+      }
+    };
+
+    fetchEventData();
+  }, [id]);
 
   const handleDateChange = (e) => {
     const selectedDate = new Date(e.target.value);
@@ -79,14 +123,15 @@ function EventForm() {
       place,
       capacity,
       image,
-      date: { month, day }
+      active,
+      date: { month, day },
     };
 
     const accessToken = localStorage.getItem("accessToken");
 
     try {
-      const response = await axios.post(
-        "http://localhost:3200/api/v1/events/event",
+      const response = await axios.patch(
+        `http://localhost:3200/api/v1/events/${id}`,
         eventData,
         {
           headers: {
@@ -95,21 +140,18 @@ function EventForm() {
         }
       );
 
-      if (response.status === 201) {
-        console.log("Evento creado exitosamente");
-        // Lógica adicional después de crear el evento
+      if (response.status === 200) {
+        console.log("Evento editado exitosamente");
+        navigate(-1);
       } else {
         console.error("Error al crear el evento");
-        console.log(response)
-        // Manejo de errores
+        console.log(response);
       }
     } catch (error) {
       console.error("Error al conectarse con el servidor", error);
-      // Manejo de errores de conexión
       setServerError("Error connecting to the server");
     }
 
-    // Limpiar los campos después del envío exitoso
     setEvenTitle("");
     setEventSubtitle("");
     setEventDescription("");
@@ -123,6 +165,10 @@ function EventForm() {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImage(file);
+  };
+
+  const handleToggleActive = () => {
+    setActive(!active); // Cambiar el estado de activo/inactivo
   };
 
   return (
@@ -140,7 +186,7 @@ function EventForm() {
           marginTop: "100px",
         }}
       >
-        Crear Evento
+        Editar Evento
       </h1>
       <div>
         <form className="event-form" onSubmit={handleSubmit}>
@@ -223,11 +269,21 @@ function EventForm() {
                   required
                 />
               </label>
+              <label>
+                Activo:
+                <Switch
+                  checked={active}
+                  onChange={handleToggleActive}
+                  color="primary"
+                  name="active"
+                  inputProps={{ "aria-label": "toggle event active status" }}
+                />
+              </label>
             </div>
           </div>
           <div className="button-container">
             <button className="create-event" type="submit">
-              Crear Evento
+              Editar Evento
             </button>
           </div>
           <div className="button-back-container">
@@ -242,6 +298,6 @@ function EventForm() {
       {serverError && <p>{serverError}</p>}
     </div>
   );
-}
+};
 
-export default EventForm;
+export default EventEdit;

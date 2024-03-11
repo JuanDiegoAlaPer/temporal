@@ -29,7 +29,7 @@ const Login = () => {
       );
 
       if (response.data) {
-        login(response.data.access, response.data.refresh, response.data.userId, response.data.role);
+        login(response.data.access, response.data.refresh);
 
         const userRole = response.data.role;
 
