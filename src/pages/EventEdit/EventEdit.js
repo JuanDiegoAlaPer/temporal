@@ -168,7 +168,7 @@ export const EventEdit = () => {
   };
 
   const handleToggleActive = () => {
-    setActive(!active); // Cambiar el estado de activo/inactivo
+    setActive(!active); 
   };
 
   return (

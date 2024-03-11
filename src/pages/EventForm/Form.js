@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import { Modal } from "antd";
+import { useNavigate } from "react-router-dom"; 
 import "./Form.scss";
 import MenuTopAdmin from "../../components/Admin/MenuTopAdmin/MenuTopAdmin";
 import MenuSiderAdmin from "../../components/Admin/MenuSiderAdmin/MenuSiderAdmin";
+import axios from "axios";
 
 function EventForm() {
   const [evenTitle, setEvenTitle] = useState("");
@@ -15,6 +19,34 @@ function EventForm() {
   const [capacity, setCapacity] = useState("");
   const [image, setImage] = useState(null);
   const [menuCollapsed, setMenuCollapsed] = useState(true);
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [serverError, setServerError] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const navigate = useNavigate();
+
+  const handleDateChange = (e) => {
+    const selectedDate = new Date(e.target.value);
+    selectedDate.setDate(selectedDate.getDate() + 1);
+    console.log(selectedDate);
+    const selectedDay = selectedDate.getDate();
+    const selectedMonth = selectedDate
+      .toLocaleString("es-ES", {
+        month: "short",
+      })
+      .toUpperCase();
+    setDay(selectedDay);
+    setMonth(selectedMonth);
+  };
+
+  const handleModal = () => {
+    setModalVisible(true); 
+  };
+
+  const handleCancelModal = () => {
+    navigate('/admin'); 
+    setModalVisible(false);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,19 +78,16 @@ function EventForm() {
 
       if (response.status === 201) {
         console.log("Evento creado exitosamente");
-        // Lógica adicional después de crear el evento
+        handleModal();
       } else {
         console.error("Error al crear el evento");
         console.log(response)
-        // Manejo de errores
       }
     } catch (error) {
       console.error("Error al conectarse con el servidor", error);
-      // Manejo de errores de conexión
       setServerError("Error connecting to the server");
     }
 
-    // Limpiar los campos después del envío exitoso
     setEvenTitle("");
     setEventSubtitle("");
     setEventDescription("");
@@ -73,6 +102,8 @@ function EventForm() {
     const file = e.target.files[0];
     setImage(file);
   };
+
+  
 
   return (
     <div className="index-event-form">
@@ -189,6 +220,14 @@ function EventForm() {
         </form>
       </div>
       {serverError && <p>{serverError}</p>}
+      <Modal
+        title="Evento creado exitosamente"
+        visible={modalVisible}
+        onOk={() => setModalVisible(false)}
+        onCancel={handleCancelModal}
+      >
+        <p>¿Quieres crear otro evento?</p>
+      </Modal>
     </div>
   );
 }

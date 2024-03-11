@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import MenuSiderAdmin from "../../components/Admin/MenuSiderAdmin/MenuSiderAdmin";
+import MenuSiderUser from "../../components/User/MenuSiderUser/MenuSiderUser";
 import { Input, Select } from "antd";
 import { SearchOutlined, UnorderedListOutlined } from "@ant-design/icons";
-import "./Admin.scss";
-import { ActivityCardAdmin } from "../../components/Admin/ActivityCardAdmin/ActivityCardAdmin";
-import MenuTopAdmin from "../../components/Admin/MenuTopAdmin/MenuTopAdmin";
-import AddEventCube from "../../components/Admin/AddEventCube/AddEventCube";
+import "./User.scss";
+import { ActivityCardUser } from "../../components/User/ActivityCardUser/ActivityCardUser";
+import MenuTopUser from "../../components/User/MenuTopUser/MenuTopUser";
 
 const { Option } = Select;
 
-export const Admin = () => {
+export const User = () => {
   const [menuCollapsed, setMenuCollapsed] = useState(true);
   const [searchValue, setSearchValue] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
@@ -26,26 +25,6 @@ export const Admin = () => {
       if (!accessToken || !refreshToken) {
         window.location.href = "/unauthorized";
         return;
-      }
-  
-      try {
-        const token = { token: accessToken };
-        const response = await axios.post(
-          "http://localhost:3200/api/v1/auth/role",
-          token
-        );
-  
-        if (response.status !== 200) {
-          throw new Error("Failed to fetch user role");
-        }
-  
-        const { role } = response.data;
-  
-        if (role !== "admin") {
-          window.location.href = "/user";
-        }
-      } catch (error) {
-        console.error("Error checking user role:", error);
       }
     };
   
@@ -81,6 +60,7 @@ export const Admin = () => {
 
   const filteredEvents = events.filter(
     (event) =>
+      event.active &&
       event.evenTitle &&
       event.evenTitle.toLowerCase().includes(searchValue.toLowerCase())
   );
@@ -96,16 +76,16 @@ export const Admin = () => {
   }, {});
 
   return (
-    <div className="admin">
-      <MenuSiderAdmin menuCollapsed={menuCollapsed} />
-      <MenuTopAdmin
+    <div className="user">
+      <MenuSiderUser menuCollapsed={menuCollapsed} />
+      <MenuTopUser
         menuCollapsed={menuCollapsed}
         setMenuCollapsed={setMenuCollapsed}
       />
-      <div className="container-admin">
-        <div className="search-card-admin">
+      <div className="container-user">
+        <div className="search-card-user">
           <Input
-            className="search-input-admin"
+            className="search-input-user"
             placeholder="Buscar"
             value={searchValue}
             onChange={handleSearchChange}
@@ -113,7 +93,7 @@ export const Admin = () => {
           />
           <Select
             placeholder="Filtrar"
-            className="custom-select-admin"
+            className="custom-select-user"
             onChange={handleSelectChange}
             suffixIcon={
               <UnorderedListOutlined style={{ color: "rgba(0,0,0,.85)" }} />
@@ -127,33 +107,32 @@ export const Admin = () => {
             ))}
           </Select>
         </div>
-        <div className="events-container-admin">
+        <div className="events-container-user">
           {selectedCategory === null ? (
             categories.map((category) => (
-              <div key={category} className="category-row-admin">
+              <div key={category} className="category-row-user">
                 <h1 style={{ marginLeft: 100 }}>{category}</h1>
-                <div className="activity-cards-row-admin">
+                <div className="activity-cards-row-user">
                   {eventsByCategory[category].map((event) => (
-                    <ActivityCardAdmin key={event._id} event={event} />
+                    <ActivityCardUser key={event._id} event={event} />
                   ))}
                 </div>
               </div>
             ))
           ) : (
-            <div className="category-row-admin">
+            <div className="category-row-user">
               <h1 style={{ marginLeft: 100 }}>{selectedCategory}</h1>
-              <div className="activity-cards-row-admin">
+              <div className="activity-cards-row-ser">
                 {eventsByCategory[selectedCategory].map((event) => (
-                  <ActivityCardAdmin key={event._id} event={event} />
+                  <ActivityCardUser key={event._id} event={event} />
                 ))}
               </div>
             </div>
           )}
         </div>
       </div>
-      <AddEventCube></AddEventCube>
     </div>
   );
 };
 
-export default Admin;
+export default User;
