@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import "./Form.scss";
 import MenuTopAdmin from "../../components/Admin/MenuTopAdmin/MenuTopAdmin";
 import MenuSiderAdmin from "../../components/Admin/MenuSiderAdmin/MenuSiderAdmin";
@@ -15,59 +15,8 @@ function EventForm() {
   const [capacity, setCapacity] = useState("");
   const [image, setImage] = useState(null);
   const [menuCollapsed, setMenuCollapsed] = useState(true);
-  const [day, setDay] = useState("");
-  const [month, setMonth] = useState("");
-  const [serverError, setServerError] = useState(null);
 
-  useEffect(() => {
-    const checkUserRole = async () => {
-      const accessToken = localStorage.getItem("accessToken");
-      const refreshToken = localStorage.getItem("refreshToken");
-  
-      if (!accessToken || !refreshToken) {
-        window.location.href = "/unauthorized";
-        return;
-      }
-  
-      try {
-        const token = { token: accessToken };
-        const response = await axios.post(
-          "http://localhost:3200/api/v1/auth/role",
-          token
-        );
-  
-        if (response.status !== 200) {
-          throw new Error("Failed to fetch user role");
-        }
-  
-        const { role } = response.data;
-  
-        if (role !== "admin") {
-          window.location.href = "/user";
-        }
-      } catch (error) {
-        console.error("Error checking user role:", error);
-      }
-    };
-  
-    checkUserRole();
-  }, []);
-
-  const handleDateChange = (e) => {
-    const selectedDate = new Date(e.target.value);
-    selectedDate.setDate(selectedDate.getDate() + 1);
-    console.log(selectedDate);
-    const selectedDay = selectedDate.getDate();
-    const selectedMonth = selectedDate
-      .toLocaleString("es-ES", {
-        month: "short",
-      })
-      .toUpperCase();
-    setDay(selectedDay);
-    setMonth(selectedMonth);
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const eventData = {
