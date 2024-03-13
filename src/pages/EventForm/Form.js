@@ -69,10 +69,11 @@ function EventForm() {
     try {
       const response = await axios.post(
         "http://localhost:3200/api/v1/events/event",
-        eventData,
+        eventData, 
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "eventData",
           },
         }
       );

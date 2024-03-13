@@ -293,7 +293,7 @@ export const EventEdit = () => {
           <div className="buttons-container-edit">
             <div className="button-container-edit">
               <button className="edit-event" type="submit">
-                Editar Evento
+                Crear Evento
               </button>
             </div>
             <div className="button-back-container-edit">
