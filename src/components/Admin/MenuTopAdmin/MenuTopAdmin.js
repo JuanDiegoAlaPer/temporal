@@ -29,14 +29,7 @@ function MenuTopAdmin(props) {
   return (
     <div className="menuTopAdmin-container">
       <Button
-        style={{
-          width: "100px",
-          fontSize: 30,
-          color: "#000",
-          display: "flex",
-          flexDirection: "start",
-          marginLeft: 8,
-        }}
+        className="menu-button"
         type="link"
         onClick={() => setMenuCollapsed(!menuCollapsed)}
       >
@@ -46,14 +39,7 @@ function MenuTopAdmin(props) {
         <img className="logoAdmin" src={Logo.logo} alt="Logo CampusConnect" />
       </div>
       <Button
-        style={{
-          width: "100px",
-          fontSize: 30,
-          color: "#000",
-          display: "flex",
-          flexDirection: "start",
-          marginLeft: 8,
-        }}
+        className="menu-button"
         type="link"
         onClick={handleLogout}
       >

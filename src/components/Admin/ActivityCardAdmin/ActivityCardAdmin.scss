@@ -7,6 +7,7 @@
   flex-direction: column;
 
   .ActivityCard-content-admin {
+    
     &-active-background {
       display: flex;
       margin: 10px;
@@ -83,8 +84,13 @@
     align-items: center;
     justify-content: center;
     background-color: #f4d73b;
+    color: #0090D0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     cursor: pointer;
+    &:hover {
+      background-color: #0090D0;
+      color: #fff;
+    }
   }
 }
 
