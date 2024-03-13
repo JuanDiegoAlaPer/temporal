@@ -53,7 +53,7 @@ export const MenuSider = (props) => {
 
   return (
     <Sider
-      className="menu-sider"
+      className={`menu-sider ${props.menuCollapsed ? 'collapsed' : ''}`}
       collapsed={props.menuCollapsed}
     >
       <Menu

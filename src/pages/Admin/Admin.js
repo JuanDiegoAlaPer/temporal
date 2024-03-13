@@ -131,7 +131,7 @@ export const Admin = () => {
           {selectedCategory === null ? (
             categories.map((category) => (
               <div key={category} className="category-row-admin">
-                <h1 style={{ marginLeft: 100 }}>{category}</h1>
+                <h1>{category}</h1>
                 <div className="activity-cards-row-admin">
                   {eventsByCategory[category].map((event) => (
                     <ActivityCardAdmin key={event._id} event={event} />
@@ -141,7 +141,7 @@ export const Admin = () => {
             ))
           ) : (
             <div className="category-row-admin">
-              <h1 style={{ marginLeft: 100 }}>{selectedCategory}</h1>
+              <h1>{selectedCategory}</h1>
               <div className="activity-cards-row-admin">
                 {eventsByCategory[selectedCategory].map((event) => (
                   <ActivityCardAdmin key={event._id} event={event} />

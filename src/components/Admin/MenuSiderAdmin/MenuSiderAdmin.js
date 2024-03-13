@@ -66,7 +66,10 @@ export const MenuSiderAdmin = (props) => {
   };
 
   return (
-    <Sider className="menu-sider-admin" collapsed={props.menuCollapsed}>
+    <Sider
+      className={`menu-sider-admin ${props.menuCollapsed ? "collapsed" : ""}`}
+      collapsed={props.menuCollapsed}
+    >
       <Menu
         className="menu-sider-admin"
         mode="inline"

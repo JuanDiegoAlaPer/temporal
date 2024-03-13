@@ -17,6 +17,9 @@
       margin-bottom: 50px;
       .search-input {
         width: 500px;
+        @media (max-width: 768px){
+          width: 200px;
+        }
       }
       .custom-select {
         width: 120px;
@@ -41,6 +44,10 @@
   white-space: nowrap;
   flex-direction: column;
   align-items: start;
+
+  @media (max-width: 768px){
+    margin-left: 0px;
+  }
 }
 
 .activity-cards-row {

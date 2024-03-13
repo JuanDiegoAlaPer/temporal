@@ -38,13 +38,16 @@ const Index = () => {
     setSelectedCategory(value === "all" ? null : value);
   };
 
-  const filteredEventsTitle = events.filter((event) =>
-    event.evenTitle.toLowerCase().includes(searchValue.toLowerCase())
+  const filteredEventsTitle = events.filter(
+    (event) =>
+      event.evenTitle &&
+      event.evenTitle.toLowerCase().includes(searchValue.toLowerCase())
   );
 
   const filteredEvents = events.filter(
     (event) =>
       event.active &&
+      event.evenTitle &&
       event.evenTitle.toLowerCase().includes(searchValue.toLowerCase())
   );
 
@@ -59,29 +62,30 @@ const Index = () => {
   }, {});
 
   return (
-    <div className='index'>
+    <div className="index">
       <MenuSider menuCollapsed={menuCollapsed} />
       <MenuTop
         menuCollapsed={menuCollapsed}
         setMenuCollapsed={setMenuCollapsed}
       />
-      <div className='container'>
-        <div className='search-card'>
+      <div className="container">
+        <div className="search-card">
           <Input
-            className='search-input'
-            placeholder='Buscar'
+            className="search-input"
+            placeholder="Buscar"
             value={searchValue}
             onChange={handleSearchChange}
             suffix={<SearchOutlined style={{ color: "rgba(0,0,0,.85)" }} />}
           />
           <Select
-            placeholder='Filtrar'
-            className='custom-select'
+            placeholder="Filtrar"
+            className="custom-select"
             onChange={handleSelectChange}
             suffixIcon={
               <UnorderedListOutlined style={{ color: "rgba(0,0,0,.85)" }} />
-            }>
-            <Option value='all'>Todo</Option>
+            }
+          >
+            <Option value="all">Todo</Option>
             {categories.map((category) => (
               <Option key={category} value={category}>
                 {category}
@@ -89,12 +93,12 @@ const Index = () => {
             ))}
           </Select>
         </div>
-        <div className='events-container'>
+        <div className="events-container">
           {selectedCategory === null ? (
             categories.map((category) => (
-              <div key={category} className='category-row'>
+              <div key={category} className="category-row">
                 <h1 style={{ marginLeft: 100 }}>{category}</h1>
-                <div className='activity-cards-row'>
+                <div className="activity-cards-row">
                   {eventsByCategory[category].map((event) => (
                     <ActivityCard key={event._id} event={event} />
                   ))}
@@ -102,9 +106,9 @@ const Index = () => {
               </div>
             ))
           ) : (
-            <div className='category-row'>
+            <div className="category-row">
               <h1 style={{ marginLeft: 100 }}>{selectedCategory}</h1>
-              <div className='activity-cards-row'>
+              <div className="activity-cards-row">
                 {eventsByCategory[selectedCategory].map((event) => (
                   <ActivityCard key={event._id} event={event} />
                 ))}
