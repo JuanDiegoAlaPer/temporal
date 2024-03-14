@@ -1,11 +1,11 @@
 .inscribe-form {
-    .event-form {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    .inscribe-event-form {
+      display: flex;
+      flex-direction: column;
       gap: 20px;
-      max-width: 800px;
+      max-width: 700px;
       margin: 0 auto;
-      margin-top: 50px;
+      margin-top: 30px;
       margin-bottom: 20px;
       padding: 20px;
       border: 1px solid #ccc;
@@ -21,14 +21,17 @@
     }
   
     .card.left {
-      grid-column: 1 / 2;
-    }
-  
-    .card.right {
-      grid-column: 2 / 3;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      height: 420px;
+    }
+  
+    .card.right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 420px;
     }
   
     .form-fields {
@@ -42,7 +45,6 @@
     }
   
     input[type="text"],
-    input[type="date"],
     input[type="number"],
     textarea {
       padding: 8px;
@@ -67,7 +69,7 @@
       width: 100%;
     }
   
-    .create-event {
+    .inscribe-event {
       padding: 10px;
       background-color: #0069A3;
       color: white;
@@ -91,16 +93,21 @@
       
     }
   }
-  
+  .buttons-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
   .button-container {
     display: flex;
     justify-content: right;
-    margin-top: 20px; 
+    margin: 20px; 
   }
   .button-back-container {
     display: flex;
     justify-content: left;
-    margin-top: 20px; 
+    margin-block-start: 20px; 
+    margin: 20px; 
   }
-  
   
