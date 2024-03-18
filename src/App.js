@@ -10,6 +10,7 @@ import EventForm from "./pages/EventForm/Form";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
 import EventEdit from "./pages/EventEdit/EventEdit";
 import InscribeForm from "./pages/InscribeForm/Inscribe";
+import InscribeFormUser from "./pages/InscribeUser/InscribeFormUser";
 
 function App() {
   return (
@@ -23,7 +24,9 @@ function App() {
           <Route path="/unauthorized" element={<Unauthorized />} ></Route>
           <Route path="/EventForm" element={<EventForm />}></Route>
           <Route path="/eventEdit/:id" element={<EventEdit />} ></Route>
-          <Route path="/inscribeForm" element={<InscribeForm />}></Route>
+          <Route path="/inscribeForm/:id" element={<InscribeForm />}></Route>
+          <Route path="/inscribeFormUser/:id" element={<InscribeFormUser />}></Route>
+
         </Routes>
       </Router>
     </div>

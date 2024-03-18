@@ -4,12 +4,12 @@ import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { Modal } from "antd";
 import { Grid } from "@mui/material";
 import { useNavigate, useParams, Link} from "react-router-dom";
-import "./Inscribe.scss";
-import MenuTop from "../../components/Guest/MenuTop/MenuTop";
-import MenuSider from "../../components/Guest/MenuSider/MenuSider";
+import "./InscribeFormUser.scss";
+import MenuTopUser from "../../components/User/MenuTopUser/MenuTopUser";
+import MenuSiderUser from "../../components/User/MenuSiderUser/MenuSiderUser";
 import axios from "axios";
 
-function InscribeForm() {
+function InscribeFormUser() {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
   const [evenTitle, setEvenTitle] = useState("");
@@ -30,6 +30,7 @@ function InscribeForm() {
   const [serverError, setServerError] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const navigate = useNavigate();
+  const [userDetails, setUserDetails] = useState(null);
 
   useEffect(() => {
     const fetchEventData = async () => {
@@ -67,6 +68,42 @@ function InscribeForm() {
 
     fetchEventData();
   }, [id]);
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        // Realizar la solicitud al servidor para obtener el ID del usuario
+        const token = localStorage.getItem('token'); // Suponiendo que tienes el token almacenado en el localStorage
+        const response = await fetch('http://localhost:3200/api/v1/getId', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ token }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Error al obtener el ID del usuario');
+        }
+
+        const data = await response.json();
+        const userId = data.id;
+
+        // Ahora, realizar una solicitud adicional para obtener los detalles del usuario usando el ID
+        const userDetailsResponse = await fetch(`http://localhost:3200/api/v1/getUserDetails?id=${userId}`);
+        if (!userDetailsResponse.ok) {
+          throw new Error('Error al obtener los detalles del usuario');
+        }
+
+        const userDetailsData = await userDetailsResponse.json();
+        setUserDetails(userDetailsData);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchUserDetails();
+  }, []);
 
   const handleModal = () => {
     setModalVisible(true);
@@ -137,9 +174,9 @@ function InscribeForm() {
 
 
   return (
-    <div className="inscribe-form">
-      <MenuSider menuCollapsed={menuCollapsed} />
-      <MenuTop
+    <div className="inscribe-form-user">
+      <MenuSiderUser menuCollapsed={menuCollapsed} />
+      <MenuTopUser
         menuCollapsed={menuCollapsed}
         setMenuCollapsed={setMenuCollapsed}
       />
@@ -154,7 +191,7 @@ function InscribeForm() {
         Inscríbete al evento
       </h1>
       <div>
-        <form className="inscribe-event-form" onSubmit={handleSubmit}>
+        <form className="inscribe-event-form-user" onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6} md={6}>
               <div className="card right">
@@ -260,4 +297,4 @@ function InscribeForm() {
   );
 }
 
-export default InscribeForm;
+export default InscribeFormUser;
