@@ -19,11 +19,11 @@ function InscribeFormUser() {
   const [category, setCategory] = useState("");
   const [place, setPlace] = useState("");
   const [capacity, setCapacity] = useState("");
-  const [image, setImage] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [comment, setComment] = useState("");
   const [phone, setPhone] = useState("");
+  const [image, setImage] = useState(null);
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [menuCollapsed, setMenuCollapsed] = useState(true);
@@ -52,7 +52,6 @@ function InscribeFormUser() {
 
         const selectedDate = new Date(response.data.date_at);
         selectedDate.setDate(selectedDate.getDate() + 1);
-        console.log(selectedDate);
         const selectedDay = selectedDate.getDate();
         const selectedMonth = selectedDate
           .toLocaleString("es-ES", {
@@ -70,39 +69,32 @@ function InscribeFormUser() {
   }, [id]);
 
   useEffect(() => {
-    const fetchUserDetails = async () => {
+    const fetchUserData = async () => {
       try {
-        // Realizar la solicitud al servidor para obtener el ID del usuario
-        const token = localStorage.getItem('token'); // Suponiendo que tienes el token almacenado en el localStorage
-        const response = await fetch('http://localhost:3200/api/v1/getId', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ token }),
+        const token = localStorage.getItem('accessToken'); 
+        const response = await axios.post('http://localhost:3200/api/v1/users/user', {
+          token
         });
-
-        if (!response.ok) {
+  
+        if (!response.data || !response.data.id) {
           throw new Error('Error al obtener el ID del usuario');
         }
-
-        const data = await response.json();
-        const userId = data.id;
-
-        // Ahora, realizar una solicitud adicional para obtener los detalles del usuario usando el ID
-        const userDetailsResponse = await fetch(`http://localhost:3200/api/v1/getUserDetails?id=${userId}`);
-        if (!userDetailsResponse.ok) {
+  
+        const userId = response.data.id;
+  
+        const userDetailsResponse = await axios.get(`http://localhost:3200/api/v1/users/${userId}`);
+        
+        if (!userDetailsResponse.data) {
           throw new Error('Error al obtener los detalles del usuario');
         }
-
-        const userDetailsData = await userDetailsResponse.json();
-        setUserDetails(userDetailsData);
+  
+        setUserDetails(userDetailsResponse.data);
       } catch (error) {
         console.error('Error:', error);
       }
     };
-
-    fetchUserDetails();
+  
+    fetchUserData();
   }, []);
 
   const handleModal = () => {
@@ -128,8 +120,7 @@ function InscribeFormUser() {
       date_at,
       category,
       place,
-      capacity,
-      image,
+      capacity
     };
 
     const accessToken = localStorage.getItem("accessToken");
@@ -168,7 +159,6 @@ function InscribeFormUser() {
     setCategory("");
     setPlace("");
     setCapacity("");
-    setImage(null);
     
   };
 
@@ -219,6 +209,7 @@ function InscribeFormUser() {
                    <br></br>
                    <label>Aforo del evento: </label>
                    <span>{capacity}</span>
+                   <span>{}</span>
       
                   </ul>
                 </div>
@@ -229,30 +220,28 @@ function InscribeFormUser() {
               <div className="card left">
                 <div className="form-fields">
                   <label>
-                  Nombres y apellidos:
+                    Nombres y apellidos:
                     <input
                       type="text"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      required
+                      value={userDetails ? userDetails.firstname + " " + userDetails.lastname : ""}
+                      onChange={(e) => setUserDetails({...userDetails, firstName: e.target.value})}
+                    />
+                  </label>
+                  
+                  <label>
+                    Correo electronico:
+                    <input
+                      type="text"
+                      value={userDetails ? userDetails.email : ""}
+                      readOnly
                     />
                   </label>
                   <label>
-                  Correo electronico:
+                    Teléfono:
                     <input
                       type="text"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                    />
-                  </label>
-                  <label>
-                  Telefono:
-                    <input
-                      type="number"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      required
+                      value={userDetails ? userDetails.phone : ""}
+                      readOnly
                     />
                   </label>
                   <label>
@@ -264,7 +253,7 @@ function InscribeFormUser() {
                       required
                     />
                   </label>
-                  
+                 
                 </div>
               </div>
             </Grid>
