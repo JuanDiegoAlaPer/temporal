@@ -1,5 +1,6 @@
 import React from 'react';
 import './ActivityCard.scss';
+import { Link } from 'react-router-dom';
 
 export const ActivityCard = ({ event }) => {
   const { evenTitle, date } = event;
@@ -18,7 +19,9 @@ export const ActivityCard = ({ event }) => {
         </div>
       </div>
       <div className='inscription-button'>
-        <h2>Inscribete</h2>
+        <Link style={{textDecoration: "none", color:"inherit"}} to={`/inscribeForm/${event._id}`}>
+          <h2>Inscribete</h2>
+        </Link>
       </div>
     </div>
   );
