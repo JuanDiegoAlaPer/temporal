@@ -2,15 +2,15 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from './AuthContext';
 import './App.scss';
 
-import Index from "./pages/index/index";
-import Login from "./pages/Login/Login";
-import Admin from "./pages/Admin/Admin";
-import User from "./pages/User/User";
-import EventForm from "./pages/EventForm/Form";
-import Unauthorized from "./pages/Unauthorized/Unauthorized";
-import EventEdit from "./pages/EventEdit/EventEdit";
-import InscribeForm from "./pages/InscribeForm/Inscribe";
-import InscribeFormUser from "./pages/InscribeUser/InscribeFormUser";
+import Index from "./pages/GuestPages/index/index";
+import Login from "./pages/GuestPages/Login/Login";
+import Admin from "./pages/AdminPages/Admin/Admin";
+import User from "./pages/UserPages/User/User";
+import EventForm from "./pages/AdminPages/EventForm/Form";
+import Unauthorized from "./pages/GuestPages/Unauthorized/Unauthorized";
+import EventEdit from "./pages/AdminPages/EventEdit/EventEdit";
+import InscribeForm from "./pages/GuestPages/InscribeForm/Inscribe";
+import InscribeFormUser from "./pages/UserPages/InscribeUser/InscribeFormUser";
 
 function App() {
   return (

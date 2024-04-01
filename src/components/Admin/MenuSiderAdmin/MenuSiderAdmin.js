@@ -1,9 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
-  AuditOutlined,
   UserOutlined,
-  FormOutlined,
   EditOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
@@ -20,16 +18,6 @@ export const MenuSiderAdmin = (props) => {
       key: "/admin",
       icon: <UserOutlined />,
       label: <span className="navbar-text">Inicio</span>,
-    },
-    {
-      key: "/admin/products",
-      icon: <FormOutlined />,
-      label: <span className="navbar-text">Calificar Evento</span>,
-    },
-    {
-      key: "/admin/management",
-      icon: <AuditOutlined />,
-      label: <span className="navbar-text">Postular Evento</span>,
     },
     {
       key: "/EventForm",

@@ -5,8 +5,8 @@ import { Modal } from "antd";
 import { Grid } from "@mui/material";
 import { useNavigate, useParams, Link} from "react-router-dom";
 import "./Inscribe.scss";
-import MenuTop from "../../components/Guest/MenuTop/MenuTop";
-import MenuSider from "../../components/Guest/MenuSider/MenuSider";
+import MenuTop from "../../../components/Guest/MenuTop/MenuTop";
+import MenuSider from "../../../components/Guest/MenuSider/MenuSider";
 import axios from "axios";
 
 function InscribeForm() {

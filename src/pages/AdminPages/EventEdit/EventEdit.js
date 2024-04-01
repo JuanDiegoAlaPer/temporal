@@ -4,8 +4,8 @@ import axios from "axios";
 import { Switch } from "@material-ui/core";
 import { Grid } from "@mui/material";
 import "./EventEdit.scss";
-import MenuTopAdmin from "../../components/Admin/MenuTopAdmin/MenuTopAdmin";
-import MenuSiderAdmin from "../../components/Admin/MenuSiderAdmin/MenuSiderAdmin";
+import MenuTopAdmin from "../../../components/Admin/MenuTopAdmin/MenuTopAdmin";
+import MenuSiderAdmin from "../../../components/Admin/MenuSiderAdmin/MenuSiderAdmin";
 
 export const EventEdit = () => {
   const { id } = useParams();
