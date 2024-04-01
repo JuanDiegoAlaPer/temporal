@@ -5,8 +5,8 @@ import { Modal } from "antd";
 import { Grid } from "@mui/material";
 import { useNavigate, useParams, Link} from "react-router-dom";
 import "./InscribeFormUser.scss";
-import MenuTopUser from "../../components/User/MenuTopUser/MenuTopUser";
-import MenuSiderUser from "../../components/User/MenuSiderUser/MenuSiderUser";
+import MenuTopUser from "../../../components/User/MenuTopUser/MenuTopUser";
+import MenuSiderUser from "../../../components/User/MenuSiderUser/MenuSiderUser";
 import axios from "axios";
 
 function InscribeFormUser() {
@@ -31,6 +31,20 @@ function InscribeFormUser() {
   const [modalVisible, setModalVisible] = useState(false);
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState(null);
+
+  useEffect(() => {
+    const checkUserRole = async () => {
+      const accessToken = localStorage.getItem("accessToken");
+      const refreshToken = localStorage.getItem("refreshToken");
+  
+      if (!accessToken || !refreshToken) {
+        window.location.href = "/unauthorized";
+        return;
+      }
+    };
+  
+    checkUserRole();
+  }, []);
 
   useEffect(() => {
     const fetchEventData = async () => {
@@ -72,17 +86,23 @@ function InscribeFormUser() {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem('accessToken'); 
-        const response = await axios.post('http://localhost:3200/api/v1/users/user', {
+        const response = await axios.post('http://localhost:3200/api/v1/auth/id', {
           token
         });
   
         if (!response.data || !response.data.id) {
           throw new Error('Error al obtener el ID del usuario');
+        } else {
+          console.log("exitoooo")
         }
   
         const userId = response.data.id;
   
-        const userDetailsResponse = await axios.get(`http://localhost:3200/api/v1/users/${userId}`);
+        const userDetailsResponse = await axios.get(`http://localhost:3200/api/v1/users/${userId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
         
         if (!userDetailsResponse.data) {
           throw new Error('Error al obtener los detalles del usuario');
@@ -224,7 +244,7 @@ function InscribeFormUser() {
                     <input
                       type="text"
                       value={userDetails ? userDetails.firstname + " " + userDetails.lastname : ""}
-                      onChange={(e) => setUserDetails({...userDetails, firstName: e.target.value})}
+                      disabled 
                     />
                   </label>
                   
@@ -233,7 +253,7 @@ function InscribeFormUser() {
                     <input
                       type="text"
                       value={userDetails ? userDetails.email : ""}
-                      readOnly
+                      disabled
                     />
                   </label>
                   <label>
@@ -241,7 +261,7 @@ function InscribeFormUser() {
                     <input
                       type="text"
                       value={userDetails ? userDetails.phone : ""}
-                      readOnly
+                      disabled
                     />
                   </label>
                   <label>
@@ -265,7 +285,7 @@ function InscribeFormUser() {
               </button>
             </div>
             <div className="button-back-container">
-              <Link to="/">
+              <Link to="/user">
                 <button className="inscribe-event" type="submit">
                   Atrás
                 </button>

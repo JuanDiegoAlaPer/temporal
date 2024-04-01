@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import MenuSider from "../../components/Guest/MenuSider/MenuSider";
+import MenuSider from "../../../components/Guest/MenuSider/MenuSider";
 import { Input, Select } from "antd";
 import { SearchOutlined, UnorderedListOutlined } from "@ant-design/icons";
 import "./index.scss";
-import { ActivityCard } from "../../components/Guest/ActivityCard/ActivityCard";
-import MenuTop from "../../components/Guest/MenuTop/MenuTop";
+import { ActivityCard } from "../../../components/Guest/ActivityCard/ActivityCard";
+import MenuTop from "../../../components/Guest/MenuTop/MenuTop";
 
 const { Option } = Select;
 
@@ -97,7 +97,7 @@ const Index = () => {
           {selectedCategory === null ? (
             categories.map((category) => (
               <div key={category} className="category-row">
-                <h1 style={{ marginLeft: 100 }}>{category}</h1>
+                <h1>{category}</h1>
                 <div className="activity-cards-row">
                   {eventsByCategory[category].map((event) => (
                     <ActivityCard key={event._id} event={event} />
@@ -107,7 +107,7 @@ const Index = () => {
             ))
           ) : (
             <div className="category-row">
-              <h1 style={{ marginLeft: 100 }}>{selectedCategory}</h1>
+              <h1>{selectedCategory}</h1>
               <div className="activity-cards-row">
                 {eventsByCategory[selectedCategory].map((event) => (
                   <ActivityCard key={event._id} event={event} />

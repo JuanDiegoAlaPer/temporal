@@ -6,8 +6,8 @@ import { Modal } from "antd";
 import { Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "./Form.scss";
-import MenuTopAdmin from "../../components/Admin/MenuTopAdmin/MenuTopAdmin";
-import MenuSiderAdmin from "../../components/Admin/MenuSiderAdmin/MenuSiderAdmin";
+import MenuTopAdmin from "../../../components/Admin/MenuTopAdmin/MenuTopAdmin";
+import MenuSiderAdmin from "../../../components/Admin/MenuSiderAdmin/MenuSiderAdmin";
 import axios from "axios";
 
 function EventForm() {

@@ -4,6 +4,7 @@ import {
   AuditOutlined,
   UserOutlined,
   FormOutlined,
+  UnorderedListOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import "./MenuSiderUser.scss";
@@ -29,6 +30,11 @@ export const MenuSiderUser = (props) => {
       key: "/admin/management",
       icon: <AuditOutlined />,
       label: <span className="navbar-text">Postular Evento</span>,
+    },
+    {
+      key: "/user/events",
+      icon: <UnorderedListOutlined />,
+      label: <span className="navbar-text">Mis Eventos</span>,
     },
   ];
 

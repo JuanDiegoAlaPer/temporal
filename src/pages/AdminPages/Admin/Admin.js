@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import MenuSiderAdmin from "../../components/Admin/MenuSiderAdmin/MenuSiderAdmin";
+import MenuSiderAdmin from "../../../components/Admin/MenuSiderAdmin/MenuSiderAdmin";
 import { Input, Select } from "antd";
 import { SearchOutlined, UnorderedListOutlined } from "@ant-design/icons";
 import "./Admin.scss";
-import { ActivityCardAdmin } from "../../components/Admin/ActivityCardAdmin/ActivityCardAdmin";
-import MenuTopAdmin from "../../components/Admin/MenuTopAdmin/MenuTopAdmin";
-import AddEventCube from "../../components/Admin/AddEventCube/AddEventCube";
+import { ActivityCardAdmin } from "../../../components/Admin/ActivityCardAdmin/ActivityCardAdmin";
+import MenuTopAdmin from "../../../components/Admin/MenuTopAdmin/MenuTopAdmin";
+import AddEventCube from "../../../components/Admin/AddEventCube/AddEventCube";
 
 const { Option } = Select;
 
@@ -151,7 +151,7 @@ export const Admin = () => {
           )}
         </div>
       </div>
-      <AddEventCube></AddEventCube>
+      <AddEventCube/>
     </div>
   );
 };

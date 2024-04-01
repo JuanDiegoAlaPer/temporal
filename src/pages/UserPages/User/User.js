@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import MenuSiderUser from "../../components/User/MenuSiderUser/MenuSiderUser";
+import MenuSiderUser from "../../../components/User/MenuSiderUser/MenuSiderUser";
 import { Input, Select } from "antd";
 import { SearchOutlined, UnorderedListOutlined } from "@ant-design/icons";
 import "./User.scss";
-import { ActivityCardUser } from "../../components/User/ActivityCardUser/ActivityCardUser";
-import MenuTopUser from "../../components/User/MenuTopUser/MenuTopUser";
+import { ActivityCardUser } from "../../../components/User/ActivityCardUser/ActivityCardUser";
+import MenuTopUser from "../../../components/User/MenuTopUser/MenuTopUser";
 
 const { Option } = Select;
 

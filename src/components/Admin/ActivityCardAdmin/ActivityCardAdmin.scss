@@ -5,7 +5,6 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-
   .ActivityCard-content-admin {
     
     &-active-background {
@@ -111,4 +110,14 @@
 
 .edit-button-admin h2 {
   font-weight: 500;
+}
+
+.activity-cards-row-admin {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-wrap: wrap;
+  @media (max-width: 768px){
+    justify-content: center;
+  }
 }
