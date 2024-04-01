@@ -47,6 +47,20 @@ function InscribeFormUser() {
   }, []);
 
   useEffect(() => {
+    const checkUserRole = async () => {
+      const accessToken = localStorage.getItem("accessToken");
+      const refreshToken = localStorage.getItem("refreshToken");
+  
+      if (!accessToken || !refreshToken) {
+        window.location.href = "/unauthorized";
+        return;
+      }
+    };
+  
+    checkUserRole();
+  }, []);
+
+  useEffect(() => {
     const fetchEventData = async () => {
       try {
         const response = await axios.get(
