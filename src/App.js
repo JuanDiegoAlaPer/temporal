@@ -9,7 +9,7 @@ import User from "./pages/UserPages/User/User";
 import EventForm from "./pages/AdminPages/EventForm/Form";
 import Unauthorized from "./pages/GuestPages/Unauthorized/Unauthorized";
 import EventEdit from "./pages/AdminPages/EventEdit/EventEdit";
-import InscribeForm from "./pages/AdminPages/InscribeForm/Inscribe";
+import InscribeForm from "./pages/GuestPages/InscribeForm/Inscribe";
 import InscribeFormUser from "./pages/UserPages/InscribeUser/InscribeFormUser";
 
 function App() {
