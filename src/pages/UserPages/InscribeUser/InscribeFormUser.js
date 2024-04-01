@@ -92,9 +92,7 @@ function InscribeFormUser() {
   
         if (!response.data || !response.data.id) {
           throw new Error('Error al obtener el ID del usuario');
-        } else {
-          console.log("exitoooo")
-        }
+        } 
   
         const userId = response.data.id;
   
@@ -117,70 +115,106 @@ function InscribeFormUser() {
     fetchUserData();
   }, []);
 
-  const handleModal = () => {
-    setModalVisible(true);
-  };
-
-  const handleCancelModal = () => {
-    navigate("/admin");
-    setModalVisible(false);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const eventData = {
-      name,
-      email,
-      comment,
-      phone,
-      evenTitle,
-      eventSubtitle,
-      eventDescription,
-      date_at,
-      category,
-      place,
-      capacity
-    };
-
-    const accessToken = localStorage.getItem("accessToken");
-
+  
     try {
-      const response = await axios.post(
-        "http://localhost:3200/api/v1/events/event",
-        eventData,
+      const accessToken = localStorage.getItem('accessToken'); 
+      const authResponse = await axios.post('http://localhost:3200/api/v1/auth/id', {
+        token: accessToken
+      });
+  
+      if (!authResponse.data || !authResponse.data.id) {
+        throw new Error('Error al obtener el ID del usuario');
+      }
+  
+      const userId = authResponse.data.id;
+
+      const eventResponse = await axios.post(
+        `http://localhost:3200/api/v1/users/add/${userId}`,
+        { eventId: id.toString() }, 
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         }
       );
-
-      if (response.status === 201) {
-        console.log("Te has inscrito exitosamente");
+  
+      if (eventResponse.status === 200) {
+        console.log("Evento agregado correctamente al usuario");
         handleModal();
       } else {
-        console.error("Error al inscribirse el evento");
-        console.log(response);
+        console.error("Error al agregar evento al usuario:", eventResponse.data);
       }
     } catch (error) {
-      console.error("Error al conectarse con el servidor", error);
-      setServerError("Error connecting to the server");
-    };
+      console.error("Error al conectar con el servidor:", error);
+    }
+};
 
-    setName("");
-    setEmail("");
-    setComment("");
-    setPhone("");
-    setEvenTitle("");
-    setEventSubtitle("");
-    setEventDescription("");
-    setDate_at("");
-    setCategory("");
-    setPlace("");
-    setCapacity("");
-    
+  const handleModal = () => {
+    setModalVisible(true);
   };
+
+  const handleCancelModal = () => {
+    navigate("/user");
+    setModalVisible(false);
+  };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   const eventData = {
+  //     name,
+  //     email,
+  //     comment,
+  //     phone,
+  //     evenTitle,
+  //     eventSubtitle,
+  //     eventDescription,
+  //     date_at,
+  //     category,
+  //     place,
+  //     capacity
+  //   };
+
+  //   const accessToken = localStorage.getItem("accessToken");
+
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:3200/api/v1/events/event",
+  //       eventData,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //       }
+  //     );
+
+  //     if (response.status === 201) {
+  //       console.log("Te has inscrito exitosamente");
+  //       handleModal();
+  //     } else {
+  //       console.error("Error al inscribirse el evento");
+  //       console.log(response);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error al conectarse con el servidor", error);
+  //     setServerError("Error connecting to the server");
+  //   };
+
+  //   setName("");
+  //   setEmail("");
+  //   setComment("");
+  //   setPhone("");
+  //   setEvenTitle("");
+  //   setEventSubtitle("");
+  //   setEventDescription("");
+  //   setDate_at("");
+  //   setCategory("");
+  //   setPlace("");
+  //   setCapacity("");
+    
+  // };
 
 
   return (
@@ -298,7 +332,7 @@ function InscribeFormUser() {
       <Modal
         title="Te has inscrito exitosamente"
         visible={modalVisible}
-        onOk={() => setModalVisible(false)}
+        onOk={handleCancelModal}
         onCancel={handleCancelModal}
       >
       </Modal>

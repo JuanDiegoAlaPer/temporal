@@ -73,12 +73,13 @@ function EventForm() {
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "eventData",
+            "Content-Type": "application/json",
           },
         }
       );
 
       if (response.status === 201) {
+        console.log(eventData);
         console.log("Evento creado exitosamente");
         handleModal();
       } else {
