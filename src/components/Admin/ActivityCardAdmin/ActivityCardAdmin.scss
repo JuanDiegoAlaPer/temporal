@@ -6,17 +6,27 @@
   align-items: center;
   flex-direction: column;
   .ActivityCard-content-admin {
-    
+
     &-active-background {
       display: flex;
+      flex-direction: column;
       margin: 10px;
       border-radius: 15px;
       height: 200px;
       width: 310px;
-      align-items: end;
+      align-items: center;
       justify-content: center;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       background-color: #888;
+
+      .event-image-admin {
+        height: 150px; 
+        width: auto;
+        max-width: 310px;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+      }
+
       .Activity-info-admin {
         height: 50px;
         width: 100%;
@@ -42,14 +52,19 @@
 
     &-inactive-background {
       display: flex;
+      flex-direction: column;
       margin: 10px;
       border-radius: 15px;
       height: 200px;
       width: 310px;
-      align-items: end;
+      align-items: center;
       justify-content: center;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       background-color: #000;
+
+      .event-image-admin { 
+        display: none;
+      }
       .Activity-info-admin {
         height: 50px;
         width: 100%;
@@ -57,8 +72,6 @@
         flex-direction: row;
         align-items: end;
         background-color: #fff;
-        border-bottom-left-radius: 15px;
-        border-bottom-right-radius: 15px;
         align-items: center;
 
         .date-admin {

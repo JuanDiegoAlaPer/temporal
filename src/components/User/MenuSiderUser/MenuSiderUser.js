@@ -22,17 +22,17 @@ export const MenuSiderUser = (props) => {
       label: <span className="navbar-text">Inicio</span>,
     },
     {
-      key: "/admin/products",
+      key: "/homeQualify",
       icon: <FormOutlined />,
       label: <span className="navbar-text">Calificar Evento</span>,
     },
     {
-      key: "/admin/management",
+      key: "/postulate",
       icon: <AuditOutlined />,
       label: <span className="navbar-text">Postular Evento</span>,
     },
     {
-      key: "/user/events",
+      key: "/myEvents",
       icon: <UnorderedListOutlined />,
       label: <span className="navbar-text">Mis Eventos</span>,
     },
@@ -66,7 +66,8 @@ export const MenuSiderUser = (props) => {
   };
 
   return (
-    <Sider className="menu-sider-user" collapsed={props.menuCollapsed}>
+    <Sider className={`menu-sider-user ${props.menuCollapsed ? "collapsed" : ""}`}
+    collapsed={props.menuCollapsed}>
       <Menu
         className="menu-sider-user"
         mode="inline"

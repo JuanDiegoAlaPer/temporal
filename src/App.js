@@ -11,6 +11,10 @@ import Unauthorized from "./pages/GuestPages/Unauthorized/Unauthorized";
 import EventEdit from "./pages/AdminPages/EventEdit/EventEdit";
 import InscribeForm from "./pages/GuestPages/InscribeForm/Inscribe";
 import InscribeFormUser from "./pages/UserPages/InscribeUser/InscribeFormUser";
+import MyEvents from "./pages/UserPages/MyEvents/MyEvents";
+import QualifyEvent from "./pages/UserPages/Qualify/QualifyEvent";
+import HomeQualify from "./pages/UserPages/Qualify/HomeQualify";
+import PostulateEvent from "./pages/GuestPages/Postulate/PostulateEvent";
 
 function App() {
   return (
@@ -26,6 +30,10 @@ function App() {
           <Route path="/eventEdit/:id" element={<EventEdit />} ></Route>
           <Route path="/inscribeForm/:id" element={<InscribeForm />}></Route>
           <Route path="/inscribeFormUser/:id" element={<InscribeFormUser />}></Route>
+          <Route path="/myEvents" element={<MyEvents />}></Route>
+          <Route path="/qualify/:id" element={<QualifyEvent />}></Route>
+          <Route path="/homeQualify" element={<HomeQualify />}></Route>
+          <Route path="/postulate" element={<PostulateEvent />}></Route>
 
         </Routes>
       </Router>

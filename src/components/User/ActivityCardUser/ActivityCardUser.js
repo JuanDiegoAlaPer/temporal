@@ -3,11 +3,13 @@ import './ActivityCardUser.scss';
 import { Link } from 'react-router-dom';
 
 export const ActivityCardUser = ({ event }) => {
-  const { evenTitle, date } = event;
+  const { evenTitle, date, image } = event;
+  const imageUrl = `http://localhost:3200/api/v1/events/images/${image}`;
 
   return (
     <div className='ActivityCard-user'>
       <div className='ActivityCard-content-user'>
+      <img src={imageUrl} alt={evenTitle} className='event-image-user' />
         <div className='Activity-info-user'>
           <div className='date-user'>
             <h3>{date.month}</h3>

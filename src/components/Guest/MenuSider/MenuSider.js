@@ -17,7 +17,7 @@ export const MenuSider = (props) => {
       label: <span className="navbar-text">Inicio</span>,
     },
     {
-      key: "/admin/management",
+      key: "/postulate",
       icon: <AuditOutlined />,
       label: <span className="navbar-text">Postular Evento</span>,
     },

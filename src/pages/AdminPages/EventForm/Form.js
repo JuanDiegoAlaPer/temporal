@@ -101,9 +101,36 @@ function EventForm() {
     setImage(null);
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    setImage(file);
+    const formData = new FormData();
+    formData.append("imageFile", file);
+    const accessToken = localStorage.getItem("accessToken");
+  
+    try {
+      const response = await axios.post(
+        "http://localhost:3200/api/v1/events/upload",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+  
+      if (response.status === 200) {
+        const imageName = response.data.fileName;
+        setImage(imageName);
+        console.log("Imagen subida correctamente:", imageName);
+      } else {
+        console.error("Error al subir la imagen");
+        console.log(response);
+      }
+    } catch (error) {
+      console.error("Error al conectar con el servidor:", error);
+      setServerError("Error al conectar con el servidor");
+    }
   };
 
   return (
@@ -206,7 +233,7 @@ function EventForm() {
                     type="file"
                     accept="image/*"
                     onChange={handleImageChange}
-                    //required
+                    required
                   />
                 </label>
               </div>

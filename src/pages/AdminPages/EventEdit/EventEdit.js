@@ -78,6 +78,7 @@ export const EventEdit = () => {
         setPlace(response.data.place);
         setCapacity(response.data.capacity);
         setActive(response.data.active);
+        setImage(response.data.image);
 
         const selectedDate = new Date(response.data.date_at);
         selectedDate.setDate(selectedDate.getDate() + 1);
@@ -163,9 +164,36 @@ export const EventEdit = () => {
     setImage(null);
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) =>  {
     const file = e.target.files[0];
-    setImage(file);
+    const formData = new FormData();
+    formData.append("imageFile", file);
+    const accessToken = localStorage.getItem("accessToken");
+  
+    try {
+      const response = await axios.post(
+        "http://localhost:3200/api/v1/events/upload",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+  
+      if (response.status === 200) {
+        const imageName = response.data.fileName;
+        setImage(imageName);
+        console.log("Imagen subida correctamente:", imageName);
+      } else {
+        console.error("Error al subir la imagen");
+        console.log(response);
+      }
+    } catch (error) {
+      console.error("Error al conectar con el servidor:", error);
+      setServerError("Error al conectar con el servidor");
+    }
   };
 
   const handleToggleActive = () => {
@@ -293,7 +321,7 @@ export const EventEdit = () => {
           <div className="buttons-container-edit">
             <div className="button-container-edit">
               <button className="edit-event" type="submit">
-                Crear Evento
+                Editar Evento
               </button>
             </div>
             <div className="button-back-container-edit">

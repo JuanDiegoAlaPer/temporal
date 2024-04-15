@@ -3,13 +3,13 @@ import axios from "axios";
 import MenuSiderUser from "../../../components/User/MenuSiderUser/MenuSiderUser";
 import { Input, Select } from "antd";
 import { SearchOutlined, UnorderedListOutlined } from "@ant-design/icons";
-import "./User.scss";
-import { ActivityCardUser } from "../../../components/User/ActivityCardUser/ActivityCardUser";
+import "./HomeQualify.scss";
+import { ActivityCardQualify } from "../../../components/User/ActivityCardUser/ActivityCardQualify";
 import MenuTopUser from "../../../components/User/MenuTopUser/MenuTopUser";
 
 const { Option } = Select;
 
-export const User = () => {
+export const HomeQualify = () => {
   const [menuCollapsed, setMenuCollapsed] = useState(true);
   const [searchValue, setSearchValue] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
@@ -76,16 +76,16 @@ export const User = () => {
   }, {});
 
   return (
-    <div className="user">
+    <div className="homequalify">
       <MenuSiderUser menuCollapsed={menuCollapsed} />
       <MenuTopUser
         menuCollapsed={menuCollapsed}
         setMenuCollapsed={setMenuCollapsed}
       />
-      <div className="container-user">
-        <div className="search-card-user">
+      <div className="container-homequalify">
+        <div className="search-card-homequalify">
           <Input
-            className="search-input-user"
+            className="search-input-homequalify"
             placeholder="Buscar"
             value={searchValue}
             onChange={handleSearchChange}
@@ -93,7 +93,7 @@ export const User = () => {
           />
           <Select
             placeholder="Filtrar"
-            className="custom-select-user"
+            className="custom-select-homequalify"
             onChange={handleSelectChange}
             suffixIcon={
               <UnorderedListOutlined style={{ color: "rgba(0,0,0,.85)" }} />
@@ -107,24 +107,24 @@ export const User = () => {
             ))}
           </Select>
         </div>
-        <div className="events-container-user">
+        <div className="events-container-homequalify">
           {selectedCategory === null ? (
             categories.map((category) => (
-              <div key={category} className="category-row-user">
+              <div key={category} className="category-row-homequalify">
                 <h1>{category}</h1>
                 <div className="activity-cards-row-user">
                   {eventsByCategory[category].map((event) => (
-                    <ActivityCardUser key={event._id} event={event} />
+                    <ActivityCardQualify key={event._id} event={event} />
                   ))}
                 </div>
               </div>
             ))
           ) : (
-            <div className="category-row-user">
-              <h1 style={{ marginLeft: 100 }}>{selectedCategory}</h1>
-              <div className="activity-cards-row-ser">
+            <div className="category-row-homequalify">
+              <h1>{selectedCategory}</h1>
+              <div className="activity-cards-row-homequalify">
                 {eventsByCategory[selectedCategory].map((event) => (
-                  <ActivityCardUser key={event._id} event={event} />
+                  <ActivityCardQualify key={event._id} event={event} />
                 ))}
               </div>
             </div>
@@ -135,4 +135,4 @@ export const User = () => {
   );
 };
 
-export default User;
+export default HomeQualify;
