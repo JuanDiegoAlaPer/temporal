@@ -77,6 +77,7 @@ function InscribeFormUser() {
         setCategory(response.data.category);
         setPlace(response.data.place);
         setCapacity(response.data.capacity);
+        setImage(response.data.image);
 
         const selectedDate = new Date(response.data.date_at);
         selectedDate.setDate(selectedDate.getDate() + 1);
@@ -174,61 +175,7 @@ function InscribeFormUser() {
     setModalVisible(false);
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   const eventData = {
-  //     name,
-  //     email,
-  //     comment,
-  //     phone,
-  //     evenTitle,
-  //     eventSubtitle,
-  //     eventDescription,
-  //     date_at,
-  //     category,
-  //     place,
-  //     capacity
-  //   };
-
-  //   const accessToken = localStorage.getItem("accessToken");
-
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:3200/api/v1/events/event",
-  //       eventData,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //         },
-  //       }
-  //     );
-
-  //     if (response.status === 201) {
-  //       console.log("Te has inscrito exitosamente");
-  //       handleModal();
-  //     } else {
-  //       console.error("Error al inscribirse el evento");
-  //       console.log(response);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error al conectarse con el servidor", error);
-  //     setServerError("Error connecting to the server");
-  //   };
-
-  //   setName("");
-  //   setEmail("");
-  //   setComment("");
-  //   setPhone("");
-  //   setEvenTitle("");
-  //   setEventSubtitle("");
-  //   setEventDescription("");
-  //   setDate_at("");
-  //   setCategory("");
-  //   setPlace("");
-  //   setCapacity("");
-    
-  // };
+  const imageUrl = `http://localhost:3200/api/v1/events/images/${image}`;
 
 
   return (
@@ -261,7 +208,7 @@ function InscribeFormUser() {
                    <br></br>
                    <span>{eventSubtitle}</span>
                    <br></br>
-                   <span>{image}</span>
+                   <span><img src={imageUrl} alt={evenTitle} className='event-image-user-inscribe' /></span>
                    <br></br>
                    <label>Descripción del evento: </label>
                    <span>{eventDescription}</span>

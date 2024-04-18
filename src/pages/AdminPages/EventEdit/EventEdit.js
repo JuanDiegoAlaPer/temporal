@@ -200,6 +200,8 @@ export const EventEdit = () => {
     setActive(!active);
   };
 
+  const imageUrl = `http://localhost:3200/api/v1/events/images/${image}`;
+
   return (
     <div className="index-event-edit">
       <MenuSiderAdmin menuCollapsed={menuCollapsed} />
@@ -222,7 +224,7 @@ export const EventEdit = () => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6} md={6}>
               <div className="card-edit right">
-                <div className="form-fields">
+                <div className="form-fields-edit">
                   <label>
                     Titulo del evento:
                     <input
@@ -306,8 +308,10 @@ export const EventEdit = () => {
             </Grid>
             <Grid item xs={12} sm={6} md={6}>
               <div className="card-edit left">
+                <label>Imagen actual</label>
+                <img src={imageUrl} alt={evenTitle} className='event-image-edit' />
                 <label>
-                  Imagen del evento:
+                  Nueva imagen del evento:
                   <input
                     type="file"
                     accept="image/*"
@@ -315,6 +319,7 @@ export const EventEdit = () => {
                     //required
                   />
                 </label>
+                
               </div>
             </Grid>
           </Grid>

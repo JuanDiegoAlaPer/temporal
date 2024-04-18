@@ -24,19 +24,23 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 420px;
+      height: 480px;
     }
   
     .card.right {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 420px;
+      height: 480px;
     }
   
     .form-fields {
       display: flex;
       flex-direction: column;
+      ul{
+        margin: 0px;
+        padding: 0px;
+      }
     }
   
     label {
@@ -109,5 +113,10 @@
     justify-content: left;
     margin-block-start: 20px; 
     margin: 20px; 
+  }
+  .event-image-user-inscribe{
+    max-width: 270px;
+    height: auto;
+    margin-top: 10px;
   }
   

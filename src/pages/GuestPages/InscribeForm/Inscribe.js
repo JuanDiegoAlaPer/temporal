@@ -48,6 +48,7 @@ function InscribeForm() {
         setCategory(response.data.category);
         setPlace(response.data.place);
         setCapacity(response.data.capacity);
+        setImage(response.data.image);
 
         const selectedDate = new Date(response.data.date_at);
         selectedDate.setDate(selectedDate.getDate() + 1);
@@ -135,6 +136,8 @@ function InscribeForm() {
     
   };
 
+  const imageUrl = `http://localhost:3200/api/v1/events/images/${image}`;
+
 
   return (
     <div className="inscribe-form">
@@ -166,7 +169,7 @@ function InscribeForm() {
                    <br></br>
                    <span>{eventSubtitle}</span>
                    <br></br>
-                   <span>{image}</span>
+                   <span><img src={imageUrl} alt={evenTitle} className='event-image-form' /></span>
                    <br></br>
                    <label>Descripción del evento: </label>
                    <span>{eventDescription}</span>

@@ -18,13 +18,22 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: white;
+    label{
+      margin-bottom: 10px;
+    }
+    input{
+      margin-top: 10px;
+    }
   }
 
   .card-edit.left {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: start;
+    align-items: center;
     height: 620px;
+    
+    
   }
 
   .card-edit.right {
@@ -110,4 +119,10 @@
   justify-content: left;
   margin-block-start: 20px; 
   margin: 20px; 
+}
+
+.event-image-edit{
+  max-width: 330px;
+  height: auto;
+  margin-bottom: 10px;
 }
